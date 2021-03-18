@@ -1,0 +1,4 @@
+*.wav
+*.png
+venv
+.ipynb_checkpoints/
