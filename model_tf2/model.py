@@ -13,6 +13,8 @@ from tensorflow.keras import layers
 from tensorflow.keras import models
 from IPython import display
 
+# show plots?
+show_plots = False
 
 # Set seed for experiment reproducibility
 seed = 42
@@ -41,10 +43,21 @@ print('Number of examples per label:',
 print('Example file tensor:', filenames[0])
 
 """Split the files into training, validation and test sets using a 80:10:10 ratio, respectively."""
+# 468686
 
-train_files = filenames[:6400]
-val_files = filenames[6400: 6400 + 800]
-test_files = filenames[-800:]
+#num_val = num_samples 
+#num_test = int(num_val * 0.3)
+#num_train = int(num_val - num_test)
+#
+#num_test = num_test * -1
+#
+train_files = filenames[:64000]
+val_files = filenames[64000: 64000 + 8000]
+test_files = filenames[-8000:]
+
+#train_files = filenames[:num_train]
+#val_files = filenames[num_train: num_train - num_test]
+#test_files = filenames[num_test:]
 
 print('Training set size', len(train_files))
 print('Validation set size', len(val_files))
@@ -91,20 +104,22 @@ waveform_ds = files_ds.map(get_waveform_and_label, num_parallel_calls=AUTOTUNE)
 
 """Let's examine a few audio waveforms with their corresponding labels."""
 
-rows = 3
-cols = 3
-n = rows*cols
-fig, axes = plt.subplots(rows, cols, figsize=(10, 12))
-for i, (audio, label) in enumerate(waveform_ds.take(n)):
-  r = i // cols
-  c = i % cols
-  ax = axes[r][c]
-  ax.plot(audio.numpy())
-  ax.set_yticks(np.arange(-1.2, 1.2, 0.2))
-  label = label.numpy().decode('utf-8')
-  ax.set_title(label)
 
-plt.show()
+if show_plots:
+    rows = 3
+    cols = 3
+    n = rows*cols
+    fig, axes = plt.subplots(rows, cols, figsize=(10, 12))
+    for i, (audio, label) in enumerate(waveform_ds.take(n)):
+      r = i // cols
+      c = i % cols
+      ax = axes[r][c]
+      ax.plot(audio.numpy())
+      ax.set_yticks(np.arange(-1.2, 1.2, 0.2))
+      label = label.numpy().decode('utf-8')
+      ax.set_title(label)
+
+    plt.show()
 
 
 def get_spectrogram(waveform):
@@ -144,15 +159,16 @@ def plot_spectrogram(spectrogram, ax):
   ax.pcolormesh(spectrogram.T)
 
 
-fig, axes = plt.subplots(2, figsize=(12, 8))
-timescale = np.arange(waveform.shape[0])
-axes[0].plot(timescale, waveform.numpy())
-axes[0].set_title('Waveform')
-#axes[0].set_xlim([0, 128000])
-plot_spectrogram(spectrogram.numpy(), axes[1])
-#axes[1].pcolormesh(spectrogram)
-axes[1].set_title('Spectrogram')
-plt.show()
+if show_plots:
+    fig, axes = plt.subplots(2, figsize=(12, 8))
+    timescale = np.arange(waveform.shape[0])
+    axes[0].plot(timescale, waveform.numpy())
+    axes[0].set_title('Waveform')
+    #axes[0].set_xlim([0, 128000])
+    plot_spectrogram(spectrogram.numpy(), axes[1])
+    #axes[1].pcolormesh(spectrogram)
+    axes[1].set_title('Spectrogram')
+    plt.show()
 
 """Now transform the waveform dataset to have spectrogram images and their corresponding labels as integer IDs."""
 
@@ -167,19 +183,20 @@ spectrogram_ds = waveform_ds.map(
 
 """Examine the spectrogram "images" for different samples of the dataset."""
 
-rows = 3
-cols = 3
-n = rows*cols
-fig, axes = plt.subplots(rows, cols, figsize=(10, 10))
-for i, (spectrogram, label_id) in enumerate(spectrogram_ds.take(n)):
-  r = i // cols
-  c = i % cols
-  ax = axes[r][c]
-  plot_spectrogram(np.squeeze(spectrogram.numpy()), ax)
-  ax.set_title(commands[label_id.numpy()])
-  ax.axis('off')
-  
-plt.show()
+if show_plots:
+    rows = 3
+    cols = 3
+    n = rows*cols
+    fig, axes = plt.subplots(rows, cols, figsize=(10, 10))
+    for i, (spectrogram, label_id) in enumerate(spectrogram_ds.take(n)):
+      r = i // cols
+      c = i % cols
+      ax = axes[r][c]
+      plot_spectrogram(np.squeeze(spectrogram.numpy()), ax)
+      ax.set_title(commands[label_id.numpy()])
+      ax.axis('off')
+      
+    plt.show()
 
 """## Build and train the model
 
@@ -251,15 +268,16 @@ history = model.fit(
     train_ds, 
     validation_data=val_ds,  
     epochs=EPOCHS,
-    callbacks=tf.keras.callbacks.EarlyStopping(verbose=1, patience=2),
+    callbacks=tf.keras.callbacks.EarlyStopping(verbose=1, patience=5),
 )
 
 """Let's check the training and validation loss curves to see how your model has improved during training."""
 
 metrics = history.history
-plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
-plt.legend(['loss', 'val_loss'])
-plt.show()
+if 'val_loss' in metrics and show_plots:
+    plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
+    plt.legend(['loss', 'val_loss'])
+    plt.show()
 
 """## Evaluate test set performance
 

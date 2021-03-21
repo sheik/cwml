@@ -98,13 +98,13 @@ if __name__ == "__main__":
     write_wav("test/test.wav", sample_rate, my_cq.astype(np.int16))
     with Pool(96) as p:
         chunk = []
-        for word in ["hello", "yes", "no", "maybe", "CQ", "QRZ", "QRM", "QSY", "QRT", "DE", "73", "poop", "KJ7PKQ", "rgr", "hw cpy"]:
+        for word in ["hello", "yes", "no", "maybe", "CQ", "QRZ", "QRM", "QSY", "QRT", "DE", "73", "poop", "KJ7PKQ", "rgr", "hw cpy","rr","test"]:
             try:
                 os.mkdir("./data/{}".format(word))
             except:
                 pass
 
-            for i in range(0, 1000):
+            for i in range(0, 150):
                 wpm = random.randint(20, 30)
                 chunk.append((word, i, wpm))
 
