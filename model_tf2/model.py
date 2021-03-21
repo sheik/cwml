@@ -123,8 +123,8 @@ if show_plots:
 
 
 def get_spectrogram(waveform):
-  # Padding for files with less than 128000 samples
-  zero_padding = tf.zeros([128000] - tf.shape(waveform), dtype=tf.float32)
+  # Padding for files with less than 256000 samples
+  zero_padding = tf.zeros([256000] - tf.shape(waveform), dtype=tf.float32)
 
   # Concatenate audio with padding so that all audio clips will be of the 
   # same length
@@ -154,7 +154,7 @@ def plot_spectrogram(spectrogram, ax):
   # represented in the x-axis (columns).
   log_spec = np.log(spectrogram.T)
   height = log_spec.shape[0]
-  X = np.arange(128000, step=999)
+  X = np.arange(256000, step=999)
   Y = range(height)
   ax.pcolormesh(spectrogram.T)
 
@@ -164,7 +164,7 @@ if show_plots:
     timescale = np.arange(waveform.shape[0])
     axes[0].plot(timescale, waveform.numpy())
     axes[0].set_title('Waveform')
-    #axes[0].set_xlim([0, 128000])
+    #axes[0].set_xlim([0, 256000])
     plot_spectrogram(spectrogram.numpy(), axes[1])
     #axes[1].pcolormesh(spectrogram)
     axes[1].set_title('Spectrogram')
@@ -243,7 +243,7 @@ norm_layer.adapt(spectrogram_ds.map(lambda x, _: x))
 
 model = models.Sequential([
     layers.Input(shape=input_shape),
-    preprocessing.Resizing(128, 32), 
+    preprocessing.Resizing(256, 32), 
     norm_layer,
     layers.Conv2D(32, 3, activation='relu'),
     layers.Conv2D(64, 3, activation='relu'),
@@ -263,7 +263,7 @@ model.compile(
     metrics=['accuracy'],
 )
 
-EPOCHS = 25
+EPOCHS = 50
 history = model.fit(
     train_ds, 
     validation_data=val_ds,  

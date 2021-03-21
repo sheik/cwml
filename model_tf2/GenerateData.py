@@ -105,7 +105,7 @@ if __name__ == "__main__":
                 pass
 
             for i in range(0, 150):
-                wpm = random.randint(20, 30)
+                wpm = random.randint(5, 30)
                 chunk.append((word, i, wpm))
 
         p.map(make_data, chunk)
