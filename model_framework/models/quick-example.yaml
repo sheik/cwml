@@ -5,7 +5,7 @@ data:
   corpus: "corpus.txt"
   jitter: 0.5                # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
   samples_per_phrase: 100    # Number of samples to generate per phrase. Samples will range in wpm, jitter, and noise
-  max_phrases: 10            # Number of phrases to take from the corpus. Specify 0 to take all 
+  max_phrases: 5             # Number of phrases to take from the corpus. Specify 0 to take all 
   sample_rate: 8000          # Sample rate for the generated data
   wpm_range:                 # Range of WPM for the generated data
     low: 20
@@ -17,7 +17,7 @@ system:
   jobs: 16                     # Number of processes to run in parallel when generating data
   gpu_enabled: true
   volumes:
-    data: "./model-b-data"             # Location to put generated wav files (training data)
-    model: "./model-b"         # Location to save model 
-    test: "./model-b-test"     # Location to save model test files 
+    data: "./model-quick-example-data"             # Location to put generated wav files (training data)
+    model: "./model-quick-example"         # Location to save model 
+    test: "./model-quick-example-test"     # Location to save model test files 
 

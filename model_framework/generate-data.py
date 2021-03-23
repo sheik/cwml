@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 except:
                     pass
 
-                for i in range(0, 1000):
+                for i in range(0, config.value('data.samples_per_phrase')):
                     wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
                     chunk.append((word, i, wpm))
 

@@ -271,12 +271,11 @@ model.compile(
 if latest:
     model.load_weights(latest)
 
-EPOCHS = 50
 history = model.fit(
     train_ds, 
     validation_data=val_ds,  
-    epochs=EPOCHS,
-    callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=2), cp_callback],
+    epochs=config.value('model.epochs'),
+    callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience')), cp_callback],
 )
 
 """Let's check the training and validation loss curves to see how your model has improved during training."""

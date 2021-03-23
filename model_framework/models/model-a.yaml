@@ -1,3 +1,6 @@
+model:
+  patience: 2                # Patience setting for keras early stopping
+  epochs: 50                 # Number of epochs 
 data:
   corpus: "corpus.txt"
   jitter: 0.5                # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
