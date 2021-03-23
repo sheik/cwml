@@ -10,6 +10,14 @@ import sys
 import os
 from multiprocessing import Pool
 
+from lib.config import ModelConfig
+
+if len(sys.argv) < 2:
+    print("Usage: python GenerateData.py <model-yaml>")
+    sys.exit(1)
+
+config = ModelConfig(sys.argv[1])
+
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...', 
                     'C':'-.-.', 'D':'-..', 'E':'.', 
                     'F':'..-.', 'G':'--.', 'H':'....', 
@@ -33,8 +41,7 @@ freq = 600 #Hz
 # how many seconds to jitter the samples
 # this should allow for a better model by
 # giving more than one "sample" for each character
-JITTER_RANGE = 0.8
-
+JITTER_RANGE = config.value('jitter')
 
 def generate_silence(time_units, wpm):
     return np.zeros(int(time_units * sample_rate / wpm))
@@ -85,13 +92,11 @@ def corpus(ngram):
 
 def make_data(si_tup):
     word, i, wpm = si_tup
-    s = word + str(i)
-    f = bytes(s.encode('utf-8')).hex()
-    filename = "./data/{}/{}.wav".format(word, i)
-    my_cq = SNR(encode(word, wpm), 40)
-    #create_image(filename)
-    print("Writing WAV {}".format(f))
-    write_wav("data/{}/{}.wav".format(word, i), sample_rate, my_cq.astype(np.int16))
+    #s = word + str(i)
+    #f = bytes(s.encode('utf-8')).hex()
+    #filename = "./{}/{}/{}.wav".format(config.value('data_directory'), word, i)
+    data = SNR(encode(word, wpm), 40)
+    write_wav("{}/{}/{}.wav".format(config.value('data_directory'), word, i), sample_rate, data.astype(np.int16))
 
 def read_in_chunks(file_object):
     i = 0
@@ -115,7 +120,7 @@ if __name__ == "__main__":
                     pass
 
                 for i in range(0, 1000):
-                    wpm = random.randint(18,25)
+                    wpm = random.randint(config.value('wpm_range.low'), config.value('wpm_range.high'))
                     chunk.append((word, i, wpm))
 
         p.map(make_data, chunk)
