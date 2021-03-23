@@ -87,7 +87,7 @@ def make_data(si_tup):
     word, i, wpm = si_tup
     snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
     data = SNR(encode(word, wpm), snr)
-    write_wav("{}/{}/{}.wav".format(config.value('system.data_directory'), word, i), sample_rate, data.astype(np.int16))
+    write_wav("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i), sample_rate, data.astype(np.int16))
 
 def read_in_chunks(file_object):
     i = 0
@@ -99,19 +99,18 @@ def read_in_chunks(file_object):
         yield data
 
 if __name__ == "__main__":
-    # generate one test sample
-    wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
-    snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
-    my_cq = SNR(encode("PROPAGATION", wpm), snr)
-    write_wav("test/test.wav", sample_rate, my_cq.astype(np.int16))
-
     # generate the data
     with Pool(config.value('system.jobs')) as p:
         chunk = []
         with open(config.value('data.corpus')) as fp:
-            for word in list(set(fp.read().split()))[0:40]:
+            try:
+                os.mkdir("{}".format(config.value('system.volumes.data')))
+                os.mkdir("{}".format(config.value('system.volumes.test')))
+            except:
+                pass
+            for word in list(set(fp.read().split()))[0:config.value('data.max_phrases')]:
                 try:
-                    os.mkdir("./{}/{}".format(config.value('system.data_directory'), word))
+                    os.mkdir("{}/{}".format(config.value('system.volumes.data'), word))
                 except:
                     pass
 
