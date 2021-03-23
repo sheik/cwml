@@ -5,7 +5,7 @@ import sys
 import pathlib
 
 # disable tensorflow logging
-#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 import matplotlib.pyplot as plt
 import numpy as np
