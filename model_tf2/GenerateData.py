@@ -41,7 +41,7 @@ freq = 600 #Hz
 # how many seconds to jitter the samples
 # this should allow for a better model by
 # giving more than one "sample" for each character
-JITTER_RANGE = config.value('jitter')
+JITTER_RANGE = config.value('data.jitter')
 
 def generate_silence(time_units, wpm):
     return np.zeros(int(time_units * sample_rate / wpm))
@@ -73,8 +73,8 @@ def encode(s, wpm):
             elif symbol == ' ':
                 result = np.concatenate((result, generate_word_sep(wpm)))
         result = np.concatenate((result, generate_letter_sep(wpm)))
+    result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
     return result
-
 
 def SNR(cw, dB):
     SNR_linear = 10.0**(dB/10.0)
@@ -83,20 +83,11 @@ def SNR(cw, dB):
     noise = np.sqrt(noise_power)*np.random.normal(0,1,len(cw))
     return noise + cw
 
-
-def corpus(ngram):
-    corpus = []
-    for i in permutations(MORSE_CODE_DICT.keys(), ngram):
-        corpus.append("".join(i))
-    return corpus
-
 def make_data(si_tup):
     word, i, wpm = si_tup
-    #s = word + str(i)
-    #f = bytes(s.encode('utf-8')).hex()
-    #filename = "./{}/{}/{}.wav".format(config.value('data_directory'), word, i)
-    data = SNR(encode(word, wpm), 40)
-    write_wav("{}/{}/{}.wav".format(config.value('data_directory'), word, i), sample_rate, data.astype(np.int16))
+    snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
+    data = SNR(encode(word, wpm), snr)
+    write_wav("{}/{}/{}.wav".format(config.value('system.data_directory'), word, i), sample_rate, data.astype(np.int16))
 
 def read_in_chunks(file_object):
     i = 0
@@ -108,19 +99,24 @@ def read_in_chunks(file_object):
         yield data
 
 if __name__ == "__main__":
-    my_cq = SNR(encode("20 WPM", 20), 40)
+    # generate one test sample
+    wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
+    snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
+    my_cq = SNR(encode("PROPAGATION", wpm), snr)
     write_wav("test/test.wav", sample_rate, my_cq.astype(np.int16))
-    with Pool(16) as p:
+
+    # generate the data
+    with Pool(config.value('system.jobs')) as p:
         chunk = []
-        with open('corpus.txt') as fp:
+        with open(config.value('data.corpus')) as fp:
             for word in list(set(fp.read().split()))[0:40]:
                 try:
-                    os.mkdir("./data/{}".format(word))
+                    os.mkdir("./{}/{}".format(config.value('system.data_directory'), word))
                 except:
                     pass
 
                 for i in range(0, 1000):
-                    wpm = random.randint(config.value('wpm_range.low'), config.value('wpm_range.high'))
+                    wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
                     chunk.append((word, i, wpm))
 
         p.map(make_data, chunk)
