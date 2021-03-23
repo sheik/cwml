@@ -17,7 +17,7 @@ system:
   jobs: 96                     # Number of processes to run in parallel when generating data
   gpu_enabled: true
   volumes:
-    data: "/mnt/raid/model-large-20-25wpm/data"             # Location to put generated wav files (training data)
-    model: "/mnt/raid/model-large-20-25wpm/model"         # Location to save model 
-    test: "./mnt/raid/model-large-20-25wpm/test"     # Location to save model test files 
+    data: "/mnt/raid/model-large-20-25wpm-data"             # Location to put generated wav files (training data)
+    model: "/mnt/raid/model-large-20-25wpm-model"         # Location to save model 
+    test: "./mnt/raid/model-large-20-25wpm-test"     # Location to save model test files 
 
