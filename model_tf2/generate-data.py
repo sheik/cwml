@@ -35,7 +35,7 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     '(':'-.--.', ')':'-.--.-', ' ': ' '}
 
 
-sample_rate = 8000
+sample_rate = config.value('data.sample_rate')
 freq = 600 #Hz
 
 # how many seconds to jitter the samples
