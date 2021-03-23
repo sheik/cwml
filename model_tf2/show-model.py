@@ -20,7 +20,7 @@ from IPython import display
 from lib.config import ModelConfig
 
 if len(sys.argv) < 2:
-    print("Usage: python GenerateData.py <model-yaml>")
+    print("Usage: python show-model.py <model-yaml>")
     sys.exit(1)
 
 config = ModelConfig(sys.argv[1])
