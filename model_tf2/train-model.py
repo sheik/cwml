@@ -5,7 +5,7 @@ import sys
 import pathlib
 
 # disable tensorflow logging
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -27,8 +27,8 @@ config = ModelConfig(sys.argv[1])
 
 if config.value('system.gpu_enabled'):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
-    assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
-    config_gpu = tf.config.experimental.set_memory_growth(physical_devices[0], True)
+    for device in physical_devices:
+        tf.config.experimental.set_memory_growth(device, True)
 
 # show plots?
 show_plots = False

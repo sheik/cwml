@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python GenerateData.py $1
-python model.py $1
+python generate-data.py $1
+python train-model.py $1
