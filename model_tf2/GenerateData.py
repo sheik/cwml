@@ -88,25 +88,35 @@ def make_data(si_tup):
     s = word + str(i)
     f = bytes(s.encode('utf-8')).hex()
     filename = "./data/{}/{}.wav".format(word, i)
-    my_cq = SNR(encode(word, wpm), random.randint(6,40))
+    my_cq = SNR(encode(word, wpm), 40)
     #create_image(filename)
     print("Writing WAV {}".format(f))
     write_wav("data/{}/{}.wav".format(word, i), sample_rate, my_cq.astype(np.int16))
 
-if __name__ == "__main__":
-    my_cq = SNR(encode("rgr", 25), 40)
-    write_wav("test/test.wav", sample_rate, my_cq.astype(np.int16))
-    with Pool(96) as p:
-        chunk = []
-        for word in ["hello", "yes", "no", "maybe", "CQ", "QRZ", "QRM", "QSY", "QRT", "DE", "73", "poop", "KJ7PKQ", "rgr", "hw cpy","rr","test"]:
-            try:
-                os.mkdir("./data/{}".format(word))
-            except:
-                pass
+def read_in_chunks(file_object):
+    i = 0
+    while True:
+        data = file_object.read(random.randint(12, 16))
+        i = i + 1
+        if not data:
+            break
+        yield data
 
-            for i in range(0, 150):
-                wpm = random.randint(5, 30)
-                chunk.append((word, i, wpm))
+if __name__ == "__main__":
+    my_cq = SNR(encode("20 WPM", 20), 40)
+    write_wav("test/test.wav", sample_rate, my_cq.astype(np.int16))
+    with Pool(16) as p:
+        chunk = []
+        with open('corpus.txt') as fp:
+            for word in list(set(fp.read().split()))[0:40]:
+                try:
+                    os.mkdir("./data/{}".format(word))
+                except:
+                    pass
+
+                for i in range(0, 1000):
+                    wpm = random.randint(18,25)
+                    chunk.append((word, i, wpm))
 
         p.map(make_data, chunk)
 

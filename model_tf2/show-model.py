@@ -260,13 +260,9 @@ for spectrogram, _ in spectrogram_ds.take(1):
 print('Input shape:', input_shape)
 num_labels = len(commands)
 
-#norm_layer = preprocessing.Normalization()
-#norm_layer.adapt(spectrogram_ds.map(lambda x, _: x))
-
 model = models.Sequential([
     layers.Input(shape=input_shape),
     preprocessing.Resizing(256, 32), 
-#    norm_layer,
     layers.Conv2D(32, 3, activation='relu'),
     layers.Conv2D(64, 3, activation='relu'),
     layers.MaxPooling2D(),
@@ -288,21 +284,13 @@ model.compile(
 if latest:
     model.load_weights(latest)
 
-EPOCHS = 50
-history = model.fit(
-    train_ds, 
-    validation_data=val_ds,  
-    epochs=EPOCHS,
-    callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=2), cp_callback],
-)
-
 """Let's check the training and validation loss curves to see how your model has improved during training."""
 
-metrics = history.history
-if 'val_loss' in metrics and show_plots:
-    plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
-    plt.legend(['loss', 'val_loss'])
-    plt.show()
+#metrics = history.history
+#if 'val_loss' in metrics and show_plots:
+#    plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
+#    plt.legend(['loss', 'val_loss'])
+#    plt.show()
 
 """## Evaluate test set performance
 
