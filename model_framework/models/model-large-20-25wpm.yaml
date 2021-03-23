@@ -14,10 +14,10 @@ data:
     low: 40
     high: 40
 system:
-  jobs: 16                     # Number of processes to run in parallel when generating data
+  jobs: 96                     # Number of processes to run in parallel when generating data
   gpu_enabled: true
   volumes:
-    data: "./model-b-data"             # Location to put generated wav files (training data)
-    model: "./model-b"         # Location to save model 
-    test: "./model-b-test"     # Location to save model test files 
+    data: "/mnt/raid/model-large-20-25wpm/data"             # Location to put generated wav files (training data)
+    model: "/mnt/raid/model-large-20-25wpm/model"         # Location to save model 
+    test: "./mnt/raid/model-large-20-25wpm/test"     # Location to save model test files 
 
