@@ -1,0 +1,8 @@
+data_directory: "./data"
+corpus: "corpus.txt"
+# Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
+jitter: 0.8
+number_of_samples_per_word: 1000
+wpm_range:
+  low: 18
+  high: 25
