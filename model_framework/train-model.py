@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 import pathlib
 
 # disable tensorflow logging
@@ -16,9 +17,18 @@ from tensorflow.keras import layers
 from tensorflow.keras import models
 from IPython import display
 
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
-config = tf.config.experimental.set_memory_growth(physical_devices[0], True)
+from lib.config import ModelConfig
+
+if len(sys.argv) < 2:
+    print("Usage: python train-model.py <model-yaml>")
+    sys.exit(1)
+
+config = ModelConfig(sys.argv[1])
+
+if config.value('system.gpu_enabled'):
+    physical_devices = tf.config.experimental.list_physical_devices('GPU')
+    for device in physical_devices:
+        tf.config.experimental.set_memory_growth(device, True)
 
 # show plots?
 show_plots = False
@@ -29,11 +39,10 @@ tf.random.set_seed(seed)
 np.random.seed(seed)
 
 # data directory
-data_dir = pathlib.Path('data')
-test_data_dir = pathlib.Path('test')
+data_dir = pathlib.Path(config.value('system.volumes.data'))
+test_data_dir = pathlib.Path(config.value('system.volumes.test'))
 
-
-checkpoint_path = "training_1/cp.ckpt"
+checkpoint_path = config.value('system.volumes.model') + "/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 latest = tf.train.latest_checkpoint(checkpoint_dir)
 
@@ -59,43 +68,17 @@ print('Number of examples per label:',
       len(tf.io.gfile.listdir(str(data_dir/commands[0]))))
 print('Example file tensor:', filenames[0])
 
-"""Split the files into training, validation and test sets using a 80:10:10 ratio, respectively."""
-# 468686
-
-#num_val = num_samples 
-#num_test = int(num_val * 0.3)
-#num_train = int(num_val - num_test)
-#
-#num_test = num_test * -1
-#
-
+# split the data
 num_train = int(num_samples * 0.8)
 num_test = int(num_samples * 0.1)
 num_val = int(num_samples * 0.1)
-
 train_files = filenames[:num_train]
 val_files = filenames[num_train: num_train + num_val]
 test_files = filenames[num_train+num_val:]
 
-#train_files = filenames[:num_train]
-#val_files = filenames[num_train: num_train - num_test]
-#test_files = filenames[num_test:]
-
 print('Training set size', len(train_files))
 print('Validation set size', len(val_files))
 print('Test set size', len(test_files))
-
-"""## Reading audio files and their labels
-
-The audio file will initially be read as a binary file, which you'll want to convert into a numerical tensor.
-
-To load an audio file, you will use [`tf.audio.decode_wav`](https://www.tensorflow.org/api_docs/python/tf/audio/decode_wav), which returns the WAV-encoded audio as a Tensor and the sample rate.
-
-A WAV file contains time series data with a set number of samples per second. 
-Each sample represents the amplitude of the audio signal at that specific time. In a 16-bit system, like the files in `mini_speech_commands`, the values range from -32768 to 32767. 
-The sample rate for this dataset is 16kHz.
-Note that `tf.audio.decode_wav` will normalize the values to the range [-1.0, 1.0].
-"""
 
 def decode_audio(audio_binary):
   audio, _ = tf.audio.decode_wav(audio_binary)
@@ -260,9 +243,13 @@ for spectrogram, _ in spectrogram_ds.take(1):
 print('Input shape:', input_shape)
 num_labels = len(commands)
 
+#norm_layer = preprocessing.Normalization()
+#norm_layer.adapt(spectrogram_ds.map(lambda x, _: x))
+
 model = models.Sequential([
     layers.Input(shape=input_shape),
     preprocessing.Resizing(256, 32), 
+#    norm_layer,
     layers.Conv2D(32, 3, activation='relu'),
     layers.Conv2D(64, 3, activation='relu'),
     layers.MaxPooling2D(),
@@ -284,13 +271,21 @@ model.compile(
 if latest:
     model.load_weights(latest)
 
+EPOCHS = 50
+history = model.fit(
+    train_ds, 
+    validation_data=val_ds,  
+    epochs=EPOCHS,
+    callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=2), cp_callback],
+)
+
 """Let's check the training and validation loss curves to see how your model has improved during training."""
 
-#metrics = history.history
-#if 'val_loss' in metrics and show_plots:
-#    plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
-#    plt.legend(['loss', 'val_loss'])
-#    plt.show()
+metrics = history.history
+if 'val_loss' in metrics and show_plots:
+    plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
+    plt.legend(['loss', 'val_loss'])
+    plt.show()
 
 """## Evaluate test set performance
 
@@ -328,14 +323,13 @@ plt.show()
 
 
 # test inference
-
-sample_file = test_data_dir/'test.wav'
-
-sample_ds = preprocess_dataset([str(sample_file)])
-
-for spectrogram, label in sample_ds.batch(1):
-  prediction = model(spectrogram)
-  plt.bar(commands, tf.nn.softmax(prediction[0]))
-  plt.title(f'Predictions for "{commands[label[0]]}"')
-  plt.show()
-
+#sample_file = test_data_dir/'test.wav'
+#
+#sample_ds = preprocess_dataset([str(sample_file)])
+#
+#for spectrogram, label in sample_ds.batch(1):
+#  prediction = model(spectrogram)
+#  plt.bar(commands, tf.nn.softmax(prediction[0]))
+#  plt.title(f'Predictions for "{commands[label[0]]}"')
+#  plt.show()
+#

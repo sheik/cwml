@@ -2,3 +2,5 @@
 *.png
 venv
 .ipynb_checkpoints/
+.gitconfig
+*.pyc
