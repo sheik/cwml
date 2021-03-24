@@ -243,19 +243,37 @@ for spectrogram, _ in spectrogram_ds.take(1):
 print('Input shape:', input_shape)
 num_labels = len(commands)
 
+model = None
 
-model = models.Sequential([
-    layers.Input(shape=input_shape),
-    preprocessing.Resizing(512, 16), 
-    layers.Conv2D(32, 3, activation='relu'),
-    layers.Conv2D(64, 3, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Dropout(0.25),
-    layers.Flatten(),
-    layers.Dense(128, activation='relu'),
-    layers.Dropout(0.5),
-    layers.Dense(num_labels),
-])
+if config.value('system.gpu_enabled'):
+    strategy = tf.distribute.MultiWorkerMirroredStrategy()
+
+    with strategy.scope():
+        model = models.Sequential([
+            layers.Input(shape=input_shape),
+            preprocessing.Resizing(512, 16), 
+            layers.Conv2D(32, 3, activation='relu'),
+            layers.Conv2D(64, 3, activation='relu'),
+            layers.MaxPooling2D(),
+            layers.Dropout(0.25),
+            layers.Flatten(),
+            layers.Dense(128, activation='relu'),
+            layers.Dropout(0.5),
+            layers.Dense(num_labels),
+        ])
+else:
+    model = models.Sequential([
+        layers.Input(shape=input_shape),
+        preprocessing.Resizing(512, 16), 
+        layers.Conv2D(32, 3, activation='relu'),
+        layers.Conv2D(64, 3, activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Dropout(0.25),
+        layers.Flatten(),
+        layers.Dense(128, activation='relu'),
+        layers.Dropout(0.5),
+        layers.Dense(num_labels),
+    ])
 
 model.summary()
 
