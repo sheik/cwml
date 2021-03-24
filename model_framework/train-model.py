@@ -241,13 +241,13 @@ num_labels = len(commands)
 
 model = None
 
-if config.value('system.gpu_enabled'):
+if config.value('system.multi_gpu_enabled'):
     strategy = tf.distribute.MultiWorkerMirroredStrategy()
 
     with strategy.scope():
         model = models.Sequential([
             layers.Input(shape=input_shape),
-            preprocessing.Resizing(1024, 16), 
+            preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
             layers.Conv2D(32, 3, activation='relu'),
             layers.Conv2D(64, 3, activation='relu'),
             layers.MaxPooling2D(),
@@ -260,7 +260,7 @@ if config.value('system.gpu_enabled'):
 else:
     model = models.Sequential([
         layers.Input(shape=input_shape),
-        preprocessing.Resizing(1024, 16), 
+        preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
         layers.Conv2D(32, 3, activation='relu'),
         layers.Conv2D(64, 3, activation='relu'),
         layers.MaxPooling2D(),
@@ -277,7 +277,7 @@ model.compile(
     optimizer=tf.keras.optimizers.Adam(),
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'],
-)
+    )
 
 if latest:
     model.load_weights(latest)

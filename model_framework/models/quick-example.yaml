@@ -1,6 +1,9 @@
 model:
   patience: 2                # Patience setting for keras early stopping
   epochs: 50                 # Number of epochs 
+  resize:                    # How to resize image
+    x: 512
+    y: 16   
 data:
   corpus: "corpus.txt"
   jitter: 0.5                # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
@@ -17,6 +20,7 @@ data:
 system:
   jobs: 16                     # Number of processes to run in parallel when generating data
   gpu_enabled: true
+  multi_gpu_enabled: false     # Should a GPU fabric be used (new/unstable)
   volumes:
     data: "./model-quick-example-data"             # Location to put generated wav files (training data)
     model: "./model-quick-example"         # Location to save model 
