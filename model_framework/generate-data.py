@@ -108,15 +108,35 @@ if __name__ == "__main__":
                 os.mkdir("{}".format(config.value('system.volumes.test')))
             except:
                 pass
-            for word in list(set(fp.read().split()))[0:config.value('data.max_phrases')]:
+            
+            total_length = 0
+            sample_length = config.value('data.sample_length') # seconds
+            current_chunk = ""
+            count = 0
+            
+            for word in fp.read().split():
+                if count > config.value('data.max_phrases'):
+                    break
+                total_length = (len(current_chunk)*20.0) / config.value('data.wpm_range.low')
+                if total_length < sample_length:
+                    current_chunk += word + " "
+                    continue
+                else:
+                    current_chunk += word
+
+                print(current_chunk)
                 try:
-                    os.mkdir("{}/{}".format(config.value('system.volumes.data'), word))
+                    os.mkdir("{}/{}".format(config.value('system.volumes.data'), current_chunk))
                 except:
                     pass
 
                 for i in range(0, config.value('data.samples_per_phrase')):
                     wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
-                    chunk.append((word, i, wpm))
+                    chunk.append((current_chunk, i, wpm))
+
+                total_length = 0
+                current_chunk = ""
+                count += 1
 
         p.map(make_data, chunk)
 
