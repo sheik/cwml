@@ -9,6 +9,7 @@ from scipy.io import wavfile
 import sys
 import os
 from multiprocessing import Pool
+from nltk import stopwords
 
 from lib.config import ModelConfig
 
@@ -98,7 +99,9 @@ def read_in_chunks(file_object):
             break
         yield data
 
+
 if __name__ == "__main__":
+    stop_words = stopwords.words('english')
     # generate the data
     with Pool(config.value('system.jobs')) as p:
         chunk = []
@@ -115,6 +118,9 @@ if __name__ == "__main__":
             count = 0
             
             for word in fp.read().split():
+                if config.value('data.remove_stopwords'):
+                    if word.lower() in stop_words:
+                        continue
                 if config.value('data.max_phrases') != 0 and count > config.value('data.max_phrases'):
                     break
                 total_length = (len(current_chunk)*20.0) / config.value('data.wpm_range.low')

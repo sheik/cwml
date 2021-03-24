@@ -11,6 +11,7 @@ data:
   max_phrases: 3000          # Number of phrases to take from the corpus. Specify 0 to take all 
   sample_rate: 8000          # Sample rate for the generated data
   sample_length: 4.0         # Approximate length samples should be in seconds
+  remove_stopwords: false    # Remove English stop words
   wpm_range:                 # Range of WPM for the generated data
     low: 20
     high: 25
