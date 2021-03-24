@@ -5,7 +5,7 @@ Millions of people were displaced, climate became chaotic. Hundreds of millions 
 LIBRARY-CYBERTRONICS CORP.
 HOBBY To create an artificial being has been the dream of man since the birth of science. Not merely the beginning of the modern age, when our forebears astonished the world with the first thinking machines: primitive monsters that could play chess. How far we have come. The artificial being is a reality of perfect simulacrum, articulated in limb, articulate in speech, and not lacking in human response�
 SHEILA Ahhh!!
-HOBBY ...and even pain memory response. How did that make you feel? Angry? Shocked?
+HOBBY ... and even pain memory response. How did that make you feel? Angry? Shocked?
 SHEILA I don't understand.
 HOBBY What did I do to your feelings?
 SHEILA You did it to my hand.
@@ -23,7 +23,7 @@ HOBBY But a mecha with a mind, with neuronal feedback. You see what I'm suggesti
 TEAM MEMBER #4 A robot that dreams?
 HOBBY Yes.
 TEAM MEMBER #4 And how exactly do we pull this off?
-FEMALE TEAM MEMBER You know, it occurs to me... um...with all this animus existing against mechas today, it isn't simply a question of creating a robot who can love, but isn't the real conundrum - can you get a human to love them back?
+FEMALE TEAM MEMBER You know, it occurs to me...  um... with all this animus existing against mechas today, it isn't simply a question of creating a robot who can love, but isn't the real conundrum - can you get a human to love them back?
 HOBBY Ours will be a perfect child caught in a freeze-frame - always loving, never ill, never changing. With all the childless couples yearning in vain for a license, our little mecha would not only open an entirely new market, it will fill a great human need.
 FEMALE TEAM MEMBER But you haven't answered my question. If a robot could genuinely love a person, what responsibility does that person hold toward that mecha in return? It's a moral question, isn't it?
 HOBBY The oldest one of all. But in the beginning, didn't God create Adam to love him?
@@ -31,9 +31,9 @@ CRYOGENIC HOSPITAL
 MONICA The baby was born as the first leaves of autumn fell. A baby boy. And Marion's wish came true. The boy had white hair. He was baptized Martin after his grandfather.
 HENRY Dr Frazier. Hi. It's good to see you.
 DR.FRAZIER Hi. How're you?
-HENRY Listen, there was an article by Randenbach in the Journal of Chinese Medicine - they're talking about these virus locators....
+HENRY Listen, there was an article by Randenbach in the Journal of Chinese Medicine - they're talking about these virus locators... .
 DR.FRAZIER Hello again, Monica.
-HENRY ... microscopic, synthetic hunter killers. Did you read that article?
+HENRY ...  microscopic, synthetic hunter killers. Did you read that article?
 MONICA I can still hear you!
 DR.FRAZIER I'm worried about her, Henry. She's really got me worried.
 HENRY Yeah, I know.
@@ -42,7 +42,7 @@ HENRY Pending.
 DR.FRAZIER So all her grief goes undigested. Henry, your son may be beyond our science, but it's your wife who can still be reached.
 HOBBY'S OFFICE
 FIRST ASSISTANT The screening process was extremely difficult. It was almost tougher than building the prototype.
-SECOND ASSISTANT Of our 2,000 employees a surprising few met your minimum requirements for the in-house testing. Initiate. Employment record. Quality of life style. Query. Internal data. Loyalty to the firm. And...in this individuals case, a family tragedy that may qualify him above the rest.
+SECOND ASSISTANT Of our 2,000 employees a surprising few met your minimum requirements for the in-house testing. Initiate. Employment record. Quality of life style. Query. Internal data. Loyalty to the firm. And... in this individuals case, a family tragedy that may qualify him above the rest.
 HOBBY I'll see him.
 FOYER-SWINTON HOME
 MONICA Henry.
@@ -55,32 +55,32 @@ MONICA I can't accept this! There is no substitute for your own child!
 HENRY You don't have to accept it or even try - it's not too late to take him back!
 MONICA What were you thinking?!
 HENRY I'll do whatever you want me to do!
-MONICA You think I can just, I can just...
+MONICA You think I can just, I can just... 
 HENRY I'll do whatever you want me to do!
-MONICA I don't know... what to do.
+MONICA I don't know...  what to do.
 HENRY I know, I know�I'll return him to Cybertronics first thing in the morning, it�s gone.
-MONICA Good. I mean Henry, did you see his face? He's, he's so real. But he's not...
+MONICA Good. I mean Henry, did you see his face? He's, he's so real. But he's not... 
 HENRY No, he's not.
 MONICA I mean, inside he's like all the rest, isn't he?
 HENRY A hundred miles of fiber, yeah.
-MONICA But outside he just looks so real... like he is a child.
+MONICA But outside he just looks so real...  like he is a child.
 HENRY A mecha child.
-MONICA A child...
+MONICA A child... 
 MASTER BATHROOM
-HENRY The show of faith my company has placed on me...on us, is extraordinary. Now there are a few simple procedures we need to follow if and when you decide to keep David. If you decide to keep him, there�s an imprinting protocol consisting of a code string of seven particular words which need to be spoken to David in the predefined order that�s been printed here. Now Monica, for our own protection, this imprinting is irreversible. The robot child�s love would be sealed, in a sense hardwired, and we�d be part of him forever.
-Because of this, after imprinting, no mecha child can be resold. If an adoptive parent should ever decide not to keep the child, they must return it to Cybertronics for destruction. Now, I had to sign a letter of agreement or they wouldn�t even let you see David. You have to sign it too... right here. Monica... don�t imprint until you're entirely sure.
+HENRY The show of faith my company has placed on me... on us, is extraordinary. Now there are a few simple procedures we need to follow if and when you decide to keep David. If you decide to keep him, there�s an imprinting protocol consisting of a code string of seven particular words which need to be spoken to David in the predefined order that�s been printed here. Now Monica, for our own protection, this imprinting is irreversible. The robot child�s love would be sealed, in a sense hardwired, and we�d be part of him forever.
+Because of this, after imprinting, no mecha child can be resold. If an adoptive parent should ever decide not to keep the child, they must return it to Cybertronics for destruction. Now, I had to sign a letter of agreement or they wouldn�t even let you see David. You have to sign it too...  right here. Monica...  don�t imprint until you're entirely sure.
 MONICA Silly man. Of course I�m not sure.
 MARTIN'S BEDROOM
 DAVID Would you like me to sleep now?
-MONICA Uh...
+MONICA Uh... 
 HENRY Good Idea. Good idea. Monica?
-MONICA Uh..well..it's late, you know�it's after nine,so uh...
+MONICA Uh..well..it's late, you know�it's after nine,so uh... 
 HENRY Yeah. Ten past.
 MONICA How..how late do they let you stay up?
 DAVID I can never go to sleep, but I can lay quietly, and not make a peep.
 MONICA So those pajamas will fit you, and uh, we'll be in to check on you first thing in the morning.
 DAVID Dress me?
-MONICA You know I'm gonna say good night...while you...boys be boys.
+MONICA You know I'm gonna say good night... while you... boys be boys.
 HENRY Raise your arms.
 HALLWAY CLOSET
 DAVID Is it a game?
@@ -93,15 +93,15 @@ MONICA Out! Out! Get outta here! And close the goddamn door!
 DINING ROOM
 DAVID, MONICA, & HENRY HA-HA-HA-HA-HA-HA-HA-HA�.!
 MARTIN'S BEDROOM
-(Monica dresses David for bed - her mind bounces back and forth between David and Martin. The next day...)
+(Monica dresses David for bed - her mind bounces back and forth between David and Martin. The next day... )
 DAVID Is it a game?
-MONICA Now, I'm gonna read some words, and�uh...they won't make any sense, but I want you to listen to them anyway. And...look at me all the time. Can you do that?
+MONICA Now, I'm gonna read some words, and�uh... they won't make any sense, but I want you to listen to them anyway. And... look at me all the time. Can you do that?
 DAVID Yes, Monica.
 MONICA Can you feel my hand on the back of your neck?
 DAVID Yes.
 MONICA Does any of this hurt?
 DAVID No.
-MONICA Okay. Now. Look at me? Ready? Cirrus. Socrates. Particle. Decibel. Hurricane. Dolphin. Tulip. Monica. David. Monica...
+MONICA Okay. Now. Look at me? Ready? Cirrus. Socrates. Particle. Decibel. Hurricane. Dolphin. Tulip. Monica. David. Monica... 
 All right�I wonder if I did that right. I don�t-
 DAVID What were those words for, Mommy?
 MONICA What did you call me?
@@ -109,15 +109,15 @@ DAVID Mommy.
 MONICA Who am I, David?
 DAVID You are my Mommy.
 MASTER BEDROOM
-MONICA (Humming...) Hmm...!
+MONICA (Humming... ) Hmm... !
 HENRY You smell lovely. I love it when you wear this stuff.
 MONICA Will you still love me when it's all gone?
 HENRY No.
-MONICA Wha...stop it!
+MONICA Wha... stop it!
 HENRY But we can get married again and begin with a fragrance that's not in such short supply.
-MONICA Hmmm...
-HENRY Gotta go...Come on, we're late!
-MONICA (Still humming...)
+MONICA Hmmm... 
+HENRY Gotta go... Come on, we're late!
+MONICA (Still humming... )
 HENRY Hello, David.
 DAVID Hello, Henry.
 MONICA Walk us out, alright, sweetheart? Come on.
@@ -126,26 +126,26 @@ FOYER
 MONICA Henry, your tie!
 HENRY Yeah I know! I'm helpless!
 MONICA You're hopeless!
-HENRY Oh, it's not bad...
-MONICA Oh, it's just tight...I was just trying so hard.
-HENRY You see the way he rearranged that...
+HENRY Oh, it's not bad... 
+MONICA Oh, it's just tight... I was just trying so hard.
+HENRY You see the way he rearranged that... 
 MONICA He tries so hard to please me. He has a way with my coffee.
 HENRY And it�s creepy. You can never hear him coming. He�s just always there.
 MONICA He is only a child.
 HENRY Monica, he�s a toy.
 MONICA He�s a gift, from you.
-David! When we leave, all the doors and windows will go smart, so you can't leave your room, but, if you'd like...oh, I put way too much on.
+David! When we leave, all the doors and windows will go smart, so you can't leave your room, but, if you'd like... oh, I put way too much on.
 DAVID Do I smell lovely?
-MONICA (Sighs) I'll go look...
+MONICA (Sighs) I'll go look... 
 MASTER BEDROOM
 DAVID Mommy? Will you die?
-MONICA Well....one day David. Yes, I will.
+MONICA Well... .one day David. Yes, I will.
 DAVID I�ll be alone.
 MONICA Don�t worry yourself so.
 DAVID How long will you live?
 MONICA For ages. For fifty years.
 DAVID I love you, Mommy. I hope you never die. Never.
-MONICA Yes...
+MONICA Yes... 
 HENRY Darling? We're becoming unfashionably, unreasonably late.
 MARTIN'S BEDROOM
 MONICA This belonged to Martin. My son.
@@ -154,9 +154,9 @@ MONICA His name is Teddy. Teddy, this is David.
 DAVID Hello, Teddy.
 TEDDY Hello, David.
 MONICA David, Teddy is a Super-Toy, and I know you�ll take good care of each other.
-TEDDY I am not...a toy.
+TEDDY I am not... a toy.
 STAIRCASE/FOYER
-MONICA Henry? Sorry...!
+MONICA Henry? Sorry... !
 HENRY What were you doing up there?
 MONICA Ohh, I'll tell you in the car. C'mon.
 MARTIN'S BEDROOM
@@ -164,23 +164,23 @@ DAVID Is fifty years a long time?
 TEDDY I don't think so.
 KITCHEN
 MONICA David, I'll get it! Honey, hand it to me.
-DAVID Look what I can do! (Operator's voice) Hello...?
-MONICA Hah...Yes?
+DAVID Look what I can do! (Operator's voice) Hello... ?
+MONICA Hah... Yes?
 DAVID (Operator's voice) Mrs. Swinton, could you hold a moment? I have an urgent call from your husband.
-MONICA Monica: Yes. I will. Uh..uh...David, I need to talk to the phone now.
+MONICA Monica: Yes. I will. Uh..uh... David, I need to talk to the phone now.
 DAVID (Henry's voice) Monica? Monica can you hear me, Monica?
 MONICA Let the phone talk now. Come on.
 DAVID (Henry's voice) Monica, can you hear me? Pick up the phone Monica.
 MONICA Run along, play with Teddy.
-DAVID (Henry's voice) Pick up the phone, Monica! Oh my god Moni...
-MONICA Hello? Henry? What is it? Wha...What? When? Oh god...
+DAVID (Henry's voice) Pick up the phone, Monica! Oh my god Moni... 
+MONICA Hello? Henry? What is it? Wha... What? When? Oh god... 
 FOYER
 MONICA David? The most wonderful thing in the whole world has happened. This is Martin. This is my son.
 MARTIN'S BEDROOM
-TEDDY Martin, no...
+TEDDY Martin, no... 
 MARTIN We�ll have a contest, to see who he comes to first. Come here, Teddy! Come here, boy! Teddy! Come here! You call him too.
 DAVID Come here, Teddy.
-MARTIN Come on...
+MARTIN Come on... 
 DAVID Come here, boy.
 MARTIN Teddy! Teddy! Come here! Come on, Teddy! Come here!
 DAVID Come here, Teddy.
@@ -195,12 +195,12 @@ MARTIN So, I guess now you�re the new Super-Toy, so what good stuff can you do
 DAVID Can you?
 MARTIN No, because I�m real. Can you break this?
 DAVID I better not.
-MARTIN These things...they do look better in pieces. They do.
+MARTIN These things... they do look better in pieces. They do.
 DAVID I can�t.
 MARTIN Stand up. Look, they made you bigger than me.
 DAVID Who did?
 MARTIN Well, they did, the dollmakers. They made you taller. Why don't you look like one?
-DAVID Like one...
+DAVID Like one... 
 MARTIN You're not cute like a doll. You just look like someone�s ordinary kid. When�s your birthday?
 DAVID I never had a birthday.
 MARTIN Okay�well, when were you first built? When�s your �build day�?
@@ -219,7 +219,7 @@ MARTIN Now, say that two times fast.
 KITCHEN
 MONICA Okay. Then you gotta put the green ones�.
 MARTIN Read to us?
-MONICA Hey... Let�s see. Oh, yes�.
+MONICA Hey...  Let�s see. Oh, yes�.
 MARTIN David�s going to love it.
 ON THE BOAT
 MONICA As soon as the show was over, the showman went into the kitchen, where the whole sheep which he was preparing for supper was roasting on a slowly turning spit in the furnace. When he saw that there was not enough wood to finish roasting it, he called Harlequin and Pulcinella and said, 'Bring me in Pinocchio! You will find him hanging on a nail. He is made of nice dry wood and I�m sure he will make a nice fire for my roast.
@@ -227,25 +227,25 @@ MARTIN'S BEDROOM
 MONICA Pinocchio worked until midnight, and instead of making eight baskets, he made sixteen. Then he went to bed, and fell asleep. As he slept, he dreamt he saw the fairy, lovely and smiling, who gave him a kiss, saying, 'Brave Pinocchio, in return for your good heart, I forgive all your past misdeeds. Be good in the future, and you will be happy.' Then the dream ended, and Pinocchio awoke, full of amazement. You can imagine how astonished he was when he saw that he was no longer a puppet, but a real boy, just like other boys.
 DINING ROOM
 HENRY Josephine evidently has.. uh.. taken a leave of absence.
-MONICA Oh my God...
-HENRY Umm...humm.
-MONICA Well...I saw that coming.
+MONICA Oh my God... 
+HENRY Umm... humm.
+MONICA Well... I saw that coming.
 HENRY How could you see that coming? They were fabulous together.
-MONICA Oh Come on! She was miserable... I mean...
+MONICA Oh Come on! She was miserable...  I mean... 
 HENRY Well, he never said they were miserable.
-MONICA Yeah.. . that�s because.... Was that because of the cutbacks or what?
+MONICA Yeah.. . that�s because... . Was that because of the cutbacks or what?
 HENRY I have no idea. They certainly don�t tell me anything.
 MONICA Didn't they have a bit of a weight problem?
-HENRY Well so do I...I mean...
+HENRY Well so do I... I mean... 
 MONICA Do not! That is ridiculous.
-HENRY ...well... all right look.. I don�t know... isn�t there...something about inner beauty?
+HENRY ... well...  all right look.. I don�t know...  isn�t there... something about inner beauty?
 TEDDY You will break.
 MONICA Oh that is ridiculous.
-HENRY Exactly...oh, work has become so silly. Does he eat?
+HENRY Exactly... oh, work has become so silly. Does he eat?
 MONICA I�m not sure.
 HENRY You�re not supposed to do that.
 MONICA David, what are you doing? David?!
-HENRY Do you have the manual... the book?
+HENRY Do you have the manual...  the book?
 MONICA Martin, put the fork down. Put it down now.
 HENRY Stop. Stop, David. Will you stop?
 MONICA David?! Stop it. Martin you�re provoking him. OK?
@@ -255,19 +255,19 @@ Stop it!! David! Stop it!
 LATER
 FIRST A.R.T. TECH Hmmm..spewed in the code blockers.
 SECOND A.R.T. TECH Smell that garlic!
-FIRST A.R.T. TECH Should clone the chest bridge... Ehhh...!
+FIRST A.R.T. TECH Should clone the chest bridge...  Ehhh... !
 SECOND A.R.T. TECH Did you locate the servers?
 FIRST A.R.T. TECH Don't touch the merchandise.
 SECOND A.R.T. TECH It's all swamp in here.
-FIRST A.R.T. TECH You... made a mess of yourself! Spinach is for rabbits, people and Popeye. Not robo-boys.
-SECOND A.R.T. TECH Go ahead insert your cells... let's do a patching on the lower shelves.
+FIRST A.R.T. TECH You...  made a mess of yourself! Spinach is for rabbits, people and Popeye. Not robo-boys.
+SECOND A.R.T. TECH Go ahead insert your cells...  let's do a patching on the lower shelves.
 DAVID It's OK, Mommy. It doesn't hurt!
 FIRST A.R.T. TECH The activators are all hooked up on this side.
-HENRY Monica...
-MONICA No! I just have to...
-SECOND A.R.T. TECH That's not all of it... that's not all of it...
+HENRY Monica... 
+MONICA No! I just have to... 
+SECOND A.R.T. TECH That's not all of it...  that's not all of it... 
 MARTIN'S BEDROOM
-MARTIN If you do something really, really, really special for me, a special mission, then I'll go tell Mommy...I love you, and then she'll love you, too.
+MARTIN If you do something really, really, really special for me, a special mission, then I'll go tell Mommy... I love you, and then she'll love you, too.
 DAVID What shall I do?
 MARTIN You have to promise, and then I'll tell you.
 DAVID You have to tell me, and then I'll promise.
@@ -288,9 +288,9 @@ HENRY What?
 MONICA Oh my god, I think I cut my eye.
 HENRY Lemme see.
 MONICA Oh god, I think it's bleeding!
-HENRY Come�come...come on, wash it out.
+HENRY Come�come... come on, wash it out.
 BACKYARD POOL
-MONICA It's normal for little boys to feel jealous and competitive. Martin's only been home a month and...it's normal for brothers to challenge each other. He...He was playing a game, he made a mistake, and he - he's practically human.
+MONICA It's normal for little boys to feel jealous and competitive. Martin's only been home a month and... it's normal for brothers to challenge each other. He... He was playing a game, he made a mistake, and he - he's practically human.
 HENRY That's not how he looked holding the knife.
 MONICA Scissors.
 HENRY It was a weapon.
@@ -304,19 +304,19 @@ TOD This him? This your little brother?
 MARTIN Technically�no.
 TOD He�s mecha!
 DAVID What�s mecha?
-TOD We're orga-nic, you�re mecha-nical. Orga, mecha, orga...
-MARTIN Tod...
-TOD ...mecha, orga, mecha...
-MARTIN Tod...stop.
+TOD We're orga-nic, you�re mecha-nical. Orga, mecha, orga... 
+MARTIN Tod... 
+TOD ... mecha, orga, mecha... 
+MARTIN Tod... stop.
 TOD I didn�t know they even made little kids.
 BOY #1 Can you pee?
 DAVID I cannot.
 BOY #1 Then let�s see what you can�t pee with.
-MARTIN Come on...
+MARTIN Come on... 
 BOY #2 Touch it.
 BOY#3 It feels so real.
-BOY #2 Oh, that�s...that�s creepy.
-BOY #4 Whoa...feels so real.
+BOY #2 Oh, that�s... that�s creepy.
+BOY #4 Whoa... feels so real.
 BOY #2 That is too real.
 TOD Mecha real. Does he have DAS?
 BOY #3 DAS what?
@@ -327,20 +327,20 @@ DAVID Keep me safe, Martin. Keep me safe!
 MARTIN Lemme go!
 DAVID Keep me safe Martin!
 MARTIN Lemme go! Mom! Mom! Mommmmmmmm!
-DAVID Keep me safe, keep me safe, keep me safe, keep me safe...
+DAVID Keep me safe, keep me safe, keep me safe, keep me safe... 
 MONICA Henry!
-Oh my...God! He's not breathing...he's not breathing! Come on, breathe!
-HENRY Come on..come on, man...Martin! Take a breath...cough it up ! Thatta boy, that's a great boy!
-MONICA Oh...thank God...thank God thank God!
+Oh my... God! He's not breathing... he's not breathing! Come on, breathe!
+HENRY Come on..come on, man... Martin! Take a breath... cough it up ! Thatta boy, that's a great boy!
+MONICA Oh... thank God... thank God thank God!
 HENRY Call Frazier-tell him what happened! Get him outta there!
 MARTIN'S BEDROOM
 MONICA Hey David?
 DAVID Mommy! Mommy!
 MONICA David, wait. I need to speak to to you for a minute, okay?
 DAVID Okay!
-MONICA Yeah...
+MONICA Yeah... 
 Monica looks over some messages that David has been writing.
-MONICA Oh, David, these are beautiful! Thank you. Um...
+MONICA Oh, David, these are beautiful! Thank you. Um... 
 Um, hey David, I was thinking that we could go for a drive tomorrow in the country. You and me. What do you say?
 DAVID And Teddy?
 MONICA Yeah, and Teddy.
@@ -357,22 +357,22 @@ David. David, hold on. David? David! Listen! Listen to me! David? David listen! 
 DAVID Is it a game?
 MONICA No.
 DAVID When will you come back for me?
-MONICA I'm not, David, you...you'll have to be here by yourself.
+MONICA I'm not, David, you... you'll have to be here by yourself.
 DAVID Alone?
 MONICA With Teddy.
 David and Monica talk over each other. For clarity, here
 is the dialogue, separated.
 DAVID No. No! No, no, no, no! No, Mommy please!
-MONICA Shhh...shhh...
+MONICA Shhh... shhh... 
 DAVID No! No! Please no Mommy no!
-MONICA They're going to destroy you...
+MONICA They're going to destroy you... 
 DAVID No, Mommy!
-MONICA David, they'll destroy you. David...David, they're going to destroy you!
+MONICA David, they'll destroy you. David... David, they're going to destroy you!
 DAVID Mommy, No! I'm sorry I broke myself! I'm so sorry I cut your hair off and I'm oh so sorry I hurt you and I hurt Martin and I hurt Henry and I hurt everybody!
-MONICA No...no, no...I have to go. I have to go! Stop it!
+MONICA No... no, no... I have to go. I have to go! Stop it!
 DAVID I'm sorry!
 MONICA Stop it! I have to GO!
-DAVID Mommy, no! Mommy! MOMMY! Mommy, if Pinocchio became a real boy and...and I become a real boy can I come home?
+DAVID Mommy, no! Mommy! MOMMY! Mommy, if Pinocchio became a real boy and... and I become a real boy can I come home?
 MONICA But that's just a story, David.
 DAVID But that story tells what happens!
 MONICA Stories are not real! You're not real!
@@ -381,20 +381,20 @@ DAVID Why do you want to leave me? Why do you want to leave me??! I'm sorry I'm 
 MONICA Let go. Let go! Let GO!!
 I'm sorry I didn't tell you about the world!
 SLEAZY MOTEL ROOM
-PATRICIA I'm afraid...
+PATRICIA I'm afraid... 
 JOE Of me? That I will hurt you?
-PATRICIA Yes...
-JOE I think... you're afraid of letting go. I think you're afraid of happiness. And this is starting to excite me. Are you afraid of seeing the stars...Patricia? I can show you how to reach them.
-PATRICIA I'm afraid... of what you've got under there. May I see what it looks like first?
-JOE Is this your first time... with something like me?
+PATRICIA Yes... 
+JOE I think...  you're afraid of letting go. I think you're afraid of happiness. And this is starting to excite me. Are you afraid of seeing the stars... Patricia? I can show you how to reach them.
+PATRICIA I'm afraid...  of what you've got under there. May I see what it looks like first?
+JOE Is this your first time...  with something like me?
 PATRICIA I've never been with mecha.
 JOE That makes two of us.
 PATRICIA I'm afraid it will hurt.
-JOE Patricia...once you've had a lover robot, you'll never want a real man...again. Are these the wounds of passion?
+JOE Patricia... once you've had a lover robot, you'll never want a real man... again. Are these the wounds of passion?
 Singer: Are the stars out tonight? I don't know if it's cloudy or bright. I only have eyes for you, dear!
-PATRICIA Do you...do you hear that music?
-Singer: (note: this is played over Joe's next line) The moon may be high, But I can't see a thing in the sky, 'Cause I only have eyes for you, Yeah...I only have eyes for you!
-JOE You... are a goddess, Patricia. You wind me up inside. But you deserve much better in your life. You deserve... me.
+PATRICIA Do you... do you hear that music?
+Singer: (note: this is played over Joe's next line) The moon may be high, But I can't see a thing in the sky, 'Cause I only have eyes for you, Yeah... I only have eyes for you!
+JOE You...  are a goddess, Patricia. You wind me up inside. But you deserve much better in your life. You deserve...  me.
 Chorus: 'Cause I only have eyes for you. The moon may be high, but I can�t see a thing in the sky �Cause I only have eyes for you!
 CITY STREET
 JANE Hey, Joe, whaddaya know?
@@ -439,14 +439,14 @@ MECHA NANNY Do you need someone to take care of you? Would you like a nanny? I h
 DAVID Do you know where the Blue Fairy lives?
 HANGING IN THE NET
 MECHA NANNY Don't be afraid, David.
-Dodo, l'enfant do, L'enfant dormira bien vite; Dodo, l'enfant do, L'enfant dormira bientot...
+Dodo, l'enfant do, L'enfant dormira bien vite; Dodo, l'enfant do, L'enfant dormira bientot... 
 TEDDY I'll break, David.
-MECHA NANNY Une chanson douce que me chantait ma maman...
+MECHA NANNY Une chanson douce que me chantait ma maman... 
 TEDDY Ow!
-MECHA NANNY Une chanson douce que me chantait ma maman...
+MECHA NANNY Une chanson douce que me chantait ma maman... 
 THE FLESH FAIR
 FRONT GATE ATTENDANT Hello. Anybody lose this? Hello? This your dog?
-TEDDY Grr-rrrr...
+TEDDY Grr-rrrr... 
 FRONT GATE ATTENDANT Take it to lost and found for me, okay?
 CREW MEMBER #1 Hey, Allen! Lost and found!
 TEDDY Do you know David?
@@ -454,19 +454,19 @@ CREW MEMBER #2 Where's the off switch?
 TEDDY Where's David? Can you help me find David? I have to find David. Are you taking me to David?
 THE ARENA
 MECHA COMEDIAN Can you shoot me OVER the propeller thing? Yea, I don't need to go through it. Ahhh, I was considering it, but I changed my mind.
-RINGLEADER Gentlemen! Start... your... engines! Ten, nine, eight, seven, six, five, four, three, two, one. What about us?!
+RINGLEADER Gentlemen! Start...  your...  engines! Ten, nine, eight, seven, six, five, four, three, two, one. What about us?!
 CROWD What about us!
-RINGLEADER What... about... us?!
+RINGLEADER What...  about...  us?!
 CROWD What about us!
 RINGLEADER We are alive, and this is a celebration of life! And this is commitment to a truly human future!
 LITTLE GIRL (to TEDDY) What's your name?
 DAVID Hello, Teddy.
 TEDDY Hello, David.
 CONTROL BOOTH
-PAPA Take it! Take it. Backgrounds rolling...
+PAPA Take it! Take it. Backgrounds rolling... 
 LITTLE GIRL Papa?
-PAPA Not on the...
-TECHNICIAN ...biker helm.
+PAPA Not on the... 
+TECHNICIAN ... biker helm.
 LITTLE GIRL Papa?
 PAPA Amanda, go on back outside, honey. It's too smoky in here.
 AMANDA There's a boy in the cage.
@@ -475,7 +475,7 @@ AMANDA There's a boy the cage.
 PAPA A boy?
 AMANDA A real boy. He's stuck in the cage.
 PAPA In the pen, honey?
-AMANDA In the jail place...
+AMANDA In the jail place... 
 TECHNICIAN Random crowd reaction-
 PAPA Hey, Russell, will you get a remote near the pig pen? Bring it up on VT1. Lemme see what she's talking about.
 RUSSELL Move it up on one.
@@ -491,10 +491,10 @@ JUNKY MECHA #1 Would you be so kind and shut down my pain receivers?
 DAVID Why is this happening?
 TAXI MECHA History repeats itself. It's the rite of blood and electricity.
 GRUMPY MECHA So, when the opportunities avail themselves, they pick away at us, cutting away our numbers so they can maintain numerical superiority!
-JUNKY MECHA #1 My time... is it up already? Goodbye everyone.
+JUNKY MECHA #1 My time...  is it up already? Goodbye everyone.
 DAVID Keep me safe! Keep me safe! Keep me safe! Keep me safe!
 CREW MEMBER Not yet! Just this one here!
-DAVID Keep me safe. Keep me safe. Keep me safe...
+DAVID Keep me safe. Keep me safe. Keep me safe... 
 FEMALE CREW MEMBER Mike, security? Mike! Do you have any reports of any missing kids, any missing children? Alright, thanks.
 PAPA How'd you get in there? Boy! You, boy! Hey, what's your name? I won't bite ya. Come on over where I can see ya. Hey hey, it won't hurt ya. I just need to see. You're a machine.
 DAVID I'm a boy.
@@ -528,12 +528,12 @@ THE ARENA
 LORD JOHNSON-JOHNSON Ladies and gentlemen. Girls and boys and children of all ages! What will they think of next?! See here: a bitty box, a tinker toy, a living doll. 'Course we all know why they made them. To seize your hearts. To replace your children! This is the latest iteration to the series of insults to human dignity. An underground scheme to phase out all of God's little children. Meet the next generation of child designed to do just that!
 Do not be fooled by the artistry of this creation. No doubt there was talent in the crafting of this simulator. Yet with the very first strike, you will see the big lie come apart before your very eyes!
 DAVID Don't burn me! Don't burn me! I'm not Pinocchio! Don't make me die! I'm David, I'm David, I'm David!
-WOMAN IN CROWD Mecha don't plead for their lives! Who is that? He looks like a boy...
-DAVID Don't make me die...don't make me die! I'm David!
+WOMAN IN CROWD Mecha don't plead for their lives! Who is that? He looks like a boy... 
+DAVID Don't make me die... don't make me die! I'm David!
 LORD JOHNSON-JOHNSON Built like a boy to disarm us! See how they try to imitate our emotions, now!
-DAVID I'm David, I'm David, I'm David...
+DAVID I'm David, I'm David, I'm David... 
 LORD JOHNSON-JOHNSON Whatever performance this sim puts on, remember we are only demolishing artificiality! Let he who is without 'sim' cast the first stone.
-CROWD He's just a boy... He's just a boy, Johnson...You're a monster!...(hubbub)
+CROWD He's just a boy...  He's just a boy, Johnson... You're a monster!... (hubbub)
 PAPA Get them out of there before they tear this place apart.
 HOBBY'S OFFICE
 ASSISTANT #1 We found him.
@@ -553,7 +553,7 @@ DAVID This way now.
 JOE Are you in bad trouble, have you run away from someone?
 DAVID My mommy told me to run away.
 JOE Why did she say that?
-DAVID I guess...because Henry didn't like me.
+DAVID I guess... because Henry didn't like me.
 JOE Why was that?
 DAVID Martin came home.
 JOE And who is he?
@@ -562,15 +562,15 @@ JOE Is Blue Fairy mecha, orga, man, or woman?
 DAVID Woman.
 JOE Woman. I know women! They sometimes ask for me by name. I know all about women. About as much as there is to know. No two are ever alike, and after they've met me, no two are ever the same! And I know where most of them can be found.
 DAVID Where?
-JOE Rouge City. Across the Delaware. Too far for our feet. We'll need help to get there. And, it is not without peril. We will have to journey....towards the moon.
+JOE Rouge City. Across the Delaware. Too far for our feet. We'll need help to get there. And, it is not without peril. We will have to journey... .towards the moon.
 DAVID Are there many women in Rouge City?
 JOE As there are stars at night.
 DAVID And how will we find just one?
 JOE We will ask Dr. Know! There is nothing he doesn't. Exactly what name do you give this woman?
-DAVID She is...just Blue Fairy.
-JOE Blue Fairy. In the world of Orga blue is the color of melancholy, yet the services I provide will put a blush back on anyones cheek. I will change the color of your fairy for you. She will scream out in the moonlight...'Ah, oh yes, oh god, oh yes, oh god, oh god'...she will make you a real boy for I will make her a real woman and all will be right with the world, because you held my hand and saved my brain. So once again my customers may ask for my by name 'Gigolo Joe, whatdoyaknow'!
+DAVID She is... just Blue Fairy.
+JOE Blue Fairy. In the world of Orga blue is the color of melancholy, yet the services I provide will put a blush back on anyones cheek. I will change the color of your fairy for you. She will scream out in the moonlight... 'Ah, oh yes, oh god, oh yes, oh god, oh god'... she will make you a real boy for I will make her a real woman and all will be right with the world, because you held my hand and saved my brain. So once again my customers may ask for my by name 'Gigolo Joe, whatdoyaknow'!
 DAVID Why do you do that?
-JOE That's just what I do. Now follow me, and don't fall behind. All roads lead to Rouge! Don't they say that, eh? Don't they just....
+JOE That's just what I do. Now follow me, and don't fall behind. All roads lead to Rouge! Don't they say that, eh? Don't they just... .
 ON THE ROADSIDE
 JOE There are girls your age who are just like me. We are the guiltless pleasures of the lonely human being. You're not going to get us pregnant, or have us over for supper with mummy and daddy. We work under you, we work on you, and we work for you. Man made us better at what we do than was ever humanly possible. If you can manage us a lift to Rouge City, all this, and much, much more, can be yours.
 TEENAGER Get in!
@@ -578,7 +578,7 @@ IN THE CAR
 JOE Say �Ah!�
 JOE & TEENS AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHH!
 ROUGE CITY PLAZA
-JOE Over there is 'Here, Kitty Kitty'. That's where the agency held my trial when I was made new. That's 'Tails'...very 'hoity-toity'. Only sunrise gents and sunset ladies. I've never been asked to perform there. Strictly sierra class robots who have no idea how to live. Can't even speak English, all made in Sweden. Couldn't tell a joke from a poke. There's Mildred! I have to show you inside Mildred!
+JOE Over there is 'Here, Kitty Kitty'. That's where the agency held my trial when I was made new. That's 'Tails'... very 'hoity-toity'. Only sunrise gents and sunset ladies. I've never been asked to perform there. Strictly sierra class robots who have no idea how to live. Can't even speak English, all made in Sweden. Couldn't tell a joke from a poke. There's Mildred! I have to show you inside Mildred!
 DAVID Are you her?
 JOE That�s Our Lady of the Immaculate Heart. The ones who made us are always looking for the ones that made them. They go in, look around their feet, sing songs, and when they come out, it's usually me they find. I've picked up a lot of business in this spot.
 DAVID But Joe, where's Blue Fairy?
@@ -595,7 +595,7 @@ DAVID That should be enough!
 JOE He's a smooth operator. He'll test our limits, but try we must.
 DR.KNOW Greetings colleagues. On author, factual text or fictionalized text, 1st or 3rd person, usual literacy range from primal level to the post doctural, usual span of styles from fairy tale to religious, who�s who, or where�s where - or, flat fact.
 DAVID Flat-fact?
-DR.KNOW Thank you for question number one. 'Flat-fact' is a term demanding an equal answer with interpretive speculation... merely not the... and what you are saying is basically that is what you-
+DR.KNOW Thank you for question number one. 'Flat-fact' is a term demanding an equal answer with interpretive speculation...  merely not the...  and what you are saying is basically that is what you-
 DAVID That shouldn't count, that wasn't my question!
 JOE You must take care not to raise your voice up at the end of a sentence. 'Flat-fact'.
 Dr.KNOW You have 6 more questions!
@@ -608,25 +608,25 @@ JOE New category. A fairy's tail.
 DAVID No! Fairy tale!
 JOE No. Fairy tale.
 DAVID What is Blue Fairy?
-DR.KNOW Pinocchio, by Carlo Collodi. At the signal, there was a rustling as flapping of wings, and a large falcon flew to the windowsill. What are your orders, beautiful fairy, he asked...
+DR.KNOW Pinocchio, by Carlo Collodi. At the signal, there was a rustling as flapping of wings, and a large falcon flew to the windowsill. What are your orders, beautiful fairy, he asked... 
 DAVID That�s her.
-DR.KNOW ...For you must know that the child with blue hair was no other than the good hearted fairy who had lived in that wood for more than a thousand years...
+DR.KNOW ... For you must know that the child with blue hair was no other than the good hearted fairy who had lived in that wood for more than a thousand years... 
 JOE David! David!
 DAVID That�s her!
 JOE It was an example of her. But I think we're getting closer.
 DAVID But if a fairy tale is real, wouldn�t it be a fact? A flat fact?
-DR.KNOW ...then the dream ended, and Pinocchio awoke, full of amazement...
+DR.KNOW ... then the dream ended, and Pinocchio awoke, full of amazement... 
 JOE Say no more. New category, please. Combine Fact with Fairy Tale. Now. Ask him again.
 DAVID How can the Blue Fairy make a robot into a real, live boy?
 DR.KNOW Come away,O human child! To the waters and the wild With a fairy, hand in hand, For the world's more full of weeping then you can understand.
 Your quest will be perilous Yet the reward is beyond price. In his book 'How Can A Robot Become Human', Professor Allen Hobby writes of the power which will transform Mecha into Orga.
 DAVID Will you tell me how to find her?
 DR.KNOW Discovery is quite possible. Our blue fairy does exist in one place, and one place only, At the end of the world Where the lions weep. Here is the place dreams are born.
-JOE Many a mecha has gone to the end of the world... never to come back! That is why they call the end of the world 'MAN-hattan'.
+JOE Many a mecha has gone to the end of the world...  never to come back! That is why they call the end of the world 'MAN-hattan'.
 DAVID And that is why we must go there!
 HALLWAY OUTSIDE DR. KNOW'S SHOP
-JOE Wait! What if the blue fairy isn't real at all, David? What if she's magic? The supernatural is the hidden web that unites the universe. Only orga believe what cannot be seen or measured. It is that oddness that separates our species. Or what if the Blue Fairy is an electronic parasite that has arisen to hold the minds of artificial intelligence? They hate us, you know? The humans...They'll stop at nothing.
-DAVID My Mommy doesn't hate me! Because I'm special, and...unique! Because there has never been anyone like me before! Ever! Mommy loves Martin because he is real and when I am real, Mommy's going to read to me, and tuck me in my bed, and sing to me, and listen to what I say, and she will cuddle with me, and tell me every day a hundred times a day that she loves me!
+JOE Wait! What if the blue fairy isn't real at all, David? What if she's magic? The supernatural is the hidden web that unites the universe. Only orga believe what cannot be seen or measured. It is that oddness that separates our species. Or what if the Blue Fairy is an electronic parasite that has arisen to hold the minds of artificial intelligence? They hate us, you know? The humans... They'll stop at nothing.
+DAVID My Mommy doesn't hate me! Because I'm special, and... unique! Because there has never been anyone like me before! Ever! Mommy loves Martin because he is real and when I am real, Mommy's going to read to me, and tuck me in my bed, and sing to me, and listen to what I say, and she will cuddle with me, and tell me every day a hundred times a day that she loves me!
 JOE She loves what you do for her, as my customers love what it is I do for them. But she does not love you David, she cannot love you. You are neither flesh, nor blood. You are not a dog, a cat or a canary. You were designed and built specific, like the rest of us. And you are alone now only because they tired of you, or replaced you with a younger model, or were displeased with something you said, or broke. They made us too smart, too quick, and too many. We are suffering for the mistakes they made because when the end comes, all that will be left is us. That's why they hate us, and that is why you must stay here, with me.
 DAVID Goodbye, Joe.
 ROUGE CITY PLAZA
@@ -660,9 +660,9 @@ DAVID So am I.
 DAVID II Hello, David. - Can you read? Can you sit down, and we can read together? Let�s be friends.
 DAVID You can�t have her.
 DAVID II I can�t hear you.
-DAVID She's mine. And I'm the ONLY one. I'm David! I'm David! I'm David! I'm David! I'm...(pause), I'm David! I'm David! I'm David! I'm special! I'm unique! I'm David! You can't have her! I'm David...I'm David...I'm David...
+DAVID She's mine. And I'm the ONLY one. I'm David! I'm David! I'm David! I'm David! I'm... (pause), I'm David! I'm David! I'm David! I'm special! I'm unique! I'm David! You can't have her! I'm David... I'm David... I'm David... 
 HOBBY David? David!
-DAVID I'm David...I'm David...
+DAVID I'm David... I'm David... 
 HOBBY Yes, you are David.
 DAVID Professor Hobby?
 HOBBY Yes David, I've been waiting for you.
@@ -685,7 +685,7 @@ JOE She is?
 DAVID She's waiting for me, we have to go!
 JOE Uh-oh. When you become a real boy, remember me to the ladies when you grow up!
 DAVID Good-bye Joe.
-JOE Good-bye David. I am...I was!
+JOE Good-bye David. I am... I was!
 UNDER WATER
 TEDDY David, please, be careful.
 STOPPED
@@ -693,8 +693,8 @@ DAVID The Blue Fairy's all right!
 TEDDY What happened?
 DAVID I don't know.
 TEDDY We are in a cage.
-DAVID Blue Fairy? Please...please, please make me into a real live boy. Please...Blue Fairy? Please...please...make me real. Blue Fairy? Please, please make me real. Please make me a real boy. Please, Blue Fairy, make me into a real boy. Please...
-NARRATOR And David continued to pray to the Blue Fairy there before him, she who smiled softly, forever...she who welcomed forever. Eventually the floodlights dimmed and died, but David could still see her palely by day, and he still addressed her, in hope. He prayed until all the sea anemones had shriveled and died. He prayed as the ocean froze and the ice encased the caged amphibicopter, and the Blue Fairy too, locking them together where he could still make her out - a blue ghost in ice - always there, always smiling, always awaiting him. Eventually he never moved at all, but his eyes always stayed open, staring ahead forever all through the darkness of each night, and the next day...and the next day...
+DAVID Blue Fairy? Please... please, please make me into a real live boy. Please... Blue Fairy? Please... please... make me real. Blue Fairy? Please, please make me real. Please make me a real boy. Please, Blue Fairy, make me into a real boy. Please... 
+NARRATOR And David continued to pray to the Blue Fairy there before him, she who smiled softly, forever... she who welcomed forever. Eventually the floodlights dimmed and died, but David could still see her palely by day, and he still addressed her, in hope. He prayed until all the sea anemones had shriveled and died. He prayed as the ocean froze and the ice encased the caged amphibicopter, and the Blue Fairy too, locking them together where he could still make her out - a blue ghost in ice - always there, always smiling, always awaiting him. Eventually he never moved at all, but his eyes always stayed open, staring ahead forever all through the darkness of each night, and the next day... and the next day... 
 Thus, 2000 years passed by.
 A.I. : Artificial Intelligence The Complete Dialogue
 Part Three
@@ -705,7 +705,7 @@ DAVID Teddy, we�re home. Mommy?! Mommy?! We're home! Where are you?!
 DISEMBODIED VOICE (BLUE FAIRY) David Daaaaaaaaavid David Daaaaaaaaaavid
 MARTIN'S BEDROOM-*EMPTY
 BLUE FAIRY You have been searching for me, haven't you David?
-DAVID For...my whole life.
+DAVID For... my whole life.
 BLUE FAIRY And what after all this time have you come to ask me?
 DAVID I had a wish to make.
 BLUE FAIRY And what is your wish?
@@ -731,8 +731,8 @@ BLUE FAIRY Dearest David, your wish is my command.
 DAVID'S BEDROOM
 DAVID Hey Joe what do you know?
 SPECIALIST (NARRATOR) David, I often felt a sort of envy of human beings and that thing they call 'spirit'. Human beings had created a million explanations of the meaning of life in art, in poetry, in mathematical formulas. Certainly, human beings must be the key to the meaning of existence, but human beings no longer existed.
-So, we began a project that would make it possible to recreate the living body of a person long dead from the DNA in a fragment of bone or mummified skin. We also wondered, would it be possible to retrieve a memory trace in resonance with a recreated body. And do you know what we found? We found... the very fabric of space-time itself appeared to store information about every event which had ever occured in the past.
-But the experiment... was a failure. For those who were resurrected only lived through a single day of renewed life. When the resurrectees fell asleep on the night of their first new day, they died, again. As soon as they became unconscious, their very existence faded away into darkness. So you see, David, the equations have shown that once an individual space-time pathway had been used, it could not be reused. If we bring your mother back now, it will only be for one day, and then you'll never be able to see her again.
+So, we began a project that would make it possible to recreate the living body of a person long dead from the DNA in a fragment of bone or mummified skin. We also wondered, would it be possible to retrieve a memory trace in resonance with a recreated body. And do you know what we found? We found...  the very fabric of space-time itself appeared to store information about every event which had ever occured in the past.
+But the experiment...  was a failure. For those who were resurrected only lived through a single day of renewed life. When the resurrectees fell asleep on the night of their first new day, they died, again. As soon as they became unconscious, their very existence faded away into darkness. So you see, David, the equations have shown that once an individual space-time pathway had been used, it could not be reused. If we bring your mother back now, it will only be for one day, and then you'll never be able to see her again.
 DAVID Maybe�maybe she will be special, maybe she will stay.
 SPECIALIST (NARRATOR) I thought this might be hard for you to understand. You were created to be so young.
 DAVID Maybe the one day will be like that one day inside the amphibicopter, maybe it will last forever.
@@ -765,6 +765,6 @@ MONICA Now make a wish.
 DAVID It came true already.
 NARRATOR By now indeed the windows were beginning to dim. David drew the shades without even needing to be asked.
 MASTER BEDROOM
-MONICA I really ought to be tucking you in. Strange. Hmm...How fascinating. I can hardly keep my eyes open. I don't know what's come over me. Such a beautiful day. I love you David. I do love you. I have always loved you.
+MONICA I really ought to be tucking you in. Strange. Hmm... How fascinating. I can hardly keep my eyes open. I don't know what's come over me. Such a beautiful day. I love you David. I do love you. I have always loved you.
 NARRATOR That was the everlasting moment he had been waiting for. And the moment had passed, for Monica was sound asleep - more than merely asleep. Should he shake her she would never rouse. So David went to sleep too. And for the first time in his life, he went to that place where dreams are born.
 THE END
