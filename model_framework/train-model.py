@@ -246,7 +246,7 @@ num_labels = len(commands)
 
 model = models.Sequential([
     layers.Input(shape=input_shape),
-    preprocessing.Resizing(256, 32), 
+    preprocessing.Resizing(512, 16), 
     layers.Conv2D(32, 3, activation='relu'),
     layers.Conv2D(64, 3, activation='relu'),
     layers.MaxPooling2D(),
