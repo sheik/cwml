@@ -1,0 +1,26 @@
+resize_y:
+  - 16
+  - 32
+resize_x:
+  - 256
+  - 512
+jitter:
+  - 0.2
+  - 0.5
+  - 0.8
+samples_per_phrase:
+  - 150
+  - 300
+remove_stopwords:
+  - true
+  - false
+sample_length:
+  - 2.0
+  - 4.0
+max_phrases:
+  - 500
+  - 1000
+snr_low:
+  - 40
+snr_high:
+  - 40
