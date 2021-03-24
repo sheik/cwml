@@ -247,7 +247,7 @@ if config.value('system.gpu_enabled'):
     with strategy.scope():
         model = models.Sequential([
             layers.Input(shape=input_shape),
-            preprocessing.Resizing(512, 16), 
+            preprocessing.Resizing(1024, 16), 
             layers.Conv2D(32, 3, activation='relu'),
             layers.Conv2D(64, 3, activation='relu'),
             layers.MaxPooling2D(),
@@ -260,7 +260,7 @@ if config.value('system.gpu_enabled'):
 else:
     model = models.Sequential([
         layers.Input(shape=input_shape),
-        preprocessing.Resizing(512, 16), 
+        preprocessing.Resizing(1024, 16), 
         layers.Conv2D(32, 3, activation='relu'),
         layers.Conv2D(64, 3, activation='relu'),
         layers.MaxPooling2D(),
