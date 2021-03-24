@@ -1,0 +1,24 @@
+model:
+  patience: 2                # Patience setting for keras early stopping
+  epochs: 50                 # Number of epochs 
+data:
+  corpus: "corpus.txt"
+  jitter: 0.5                # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
+  samples_per_phrase: 100    # Number of samples to generate per phrase. Samples will range in wpm, jitter, and noise
+  max_phrases: 0             # Number of phrases to take from the corpus. Specify 0 to take all 
+  sample_rate: 8000          # Sample rate for the generated data
+  sample_length: 4.0         # Approximate length samples should be in seconds
+  wpm_range:                 # Range of WPM for the generated data
+    low: 20
+    high: 25
+  snr_range:                 # Range of SNR for the generated data
+    low: 40
+    high: 40
+system:
+  jobs: 96                     # Number of processes to run in parallel when generating data
+  gpu_enabled: true
+  volumes:
+    data: "/mnt/raid/test-data"             # Location to put generated wav files (training data)
+    model: "/mnt/raid/test-model"         # Location to save model 
+    test: "/mnt/raid/test-test"     # Location to save model test files 
+

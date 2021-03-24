@@ -115,7 +115,7 @@ if __name__ == "__main__":
             count = 0
             
             for word in fp.read().split():
-                if count > config.value('data.max_phrases'):
+                if config.value('data.max_phrases') != 0 and count > config.value('data.max_phrases'):
                     break
                 total_length = (len(current_chunk)*20.0) / config.value('data.wpm_range.low')
                 if total_length < sample_length:
