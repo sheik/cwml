@@ -9,7 +9,7 @@ from scipy.io import wavfile
 import sys
 import os
 from multiprocessing import Pool
-from nltk import stopwords
+from nltk.corpus import stopwords
 
 from lib.config import ModelConfig
 
