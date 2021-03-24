@@ -243,13 +243,10 @@ for spectrogram, _ in spectrogram_ds.take(1):
 print('Input shape:', input_shape)
 num_labels = len(commands)
 
-#norm_layer = preprocessing.Normalization()
-#norm_layer.adapt(spectrogram_ds.map(lambda x, _: x))
 
 model = models.Sequential([
     layers.Input(shape=input_shape),
     preprocessing.Resizing(256, 32), 
-#    norm_layer,
     layers.Conv2D(32, 3, activation='relu'),
     layers.Conv2D(64, 3, activation='relu'),
     layers.MaxPooling2D(),
@@ -311,14 +308,14 @@ print(f'Test set accuracy: {test_acc:.0%}')
 
 A confusion matrix is helpful to see how well the model did on each of the commands in the test set.
 """
-
-confusion_mtx = tf.math.confusion_matrix(y_true, y_pred) 
-plt.figure(figsize=(10, 8))
-sns.heatmap(confusion_mtx, xticklabels=commands, yticklabels=commands, 
-            annot=True, fmt='g')
-plt.xlabel('Prediction')
-plt.ylabel('Label')
-plt.show()
+if show_plots:
+    confusion_mtx = tf.math.confusion_matrix(y_true, y_pred) 
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(confusion_mtx, xticklabels=commands, yticklabels=commands, 
+                annot=True, fmt='g')
+    plt.xlabel('Prediction')
+    plt.ylabel('Label')
+    plt.show()
 
 
 # test inference
