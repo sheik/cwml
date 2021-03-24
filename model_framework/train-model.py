@@ -101,8 +101,6 @@ def get_waveform_and_label(file_path):
   waveform = decode_audio(audio_binary)
   return waveform, label
 
-"""You will now apply `process_path` to build your training set to extract the audio-label pairs and check the results. You'll build the validation and test sets using a similar procedure later on."""
-
 AUTOTUNE = tf.data.AUTOTUNE
 files_ds = tf.data.Dataset.from_tensor_slices(train_files)
 waveform_ds = files_ds.map(get_waveform_and_label, num_parallel_calls=AUTOTUNE)
@@ -225,17 +223,15 @@ batch_size = 64
 train_ds = train_ds.batch(batch_size)
 val_ds = val_ds.batch(batch_size)
 
+# TODO do some testing with cache / prefetch
 """Add dataset [`cache()`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset#cache) and [`prefetch()`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset#prefetch) operations to reduce read latency while training the model."""
 
 #train_ds = train_ds.cache().prefetch(AUTOTUNE)
 #val_ds = val_ds.cache().prefetch(AUTOTUNE)
 
-"""For the model, you'll use a simple convolutional neural network (CNN), since you have transformed the audio files into spectrogram images.
+"""For the model, we use a simple convolutional neural network (CNN), since we have transformed the audio files into spectrogram images.
 The model also has the following additional preprocessing layers:
 - A [`Resizing`](https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Resizing) layer to downsample the input to enable the model to train faster.
-- A [`Normalization`](https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Normalization) layer to normalize each pixel in the image based on its mean and standard deviation.
-
-For the `Normalization` layer, its `adapt` method would first need to be called on the training data in order to compute aggregate statistics (i.e. mean and standard deviation).
 """
 
 for spectrogram, _ in spectrogram_ds.take(1):
@@ -322,10 +318,7 @@ y_true = test_labels
 test_acc = sum(y_pred == y_true) / len(y_true)
 print(f'Test set accuracy: {test_acc:.0%}')
 
-"""### Display a confusion matrix
-
-A confusion matrix is helpful to see how well the model did on each of the commands in the test set.
-"""
+# display confusion matrix (only practical for small datasets)
 if show_plots:
     confusion_mtx = tf.math.confusion_matrix(y_true, y_pred) 
     plt.figure(figsize=(10, 8))
