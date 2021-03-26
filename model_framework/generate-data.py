@@ -50,8 +50,9 @@ def generate_silence(time_units, wpm):
 def generate_tone(time_units, wpm):
     jitter = random.uniform(time_units*1.0-JITTER_RANGE,time_units*1.0+JITTER_RANGE)
     t = np.linspace(0.0, jitter / wpm, int(sample_rate*jitter/wpm))
-    dit = np.sin(2.0 * np.pi * freq * t)
-    return ((dit / max(abs(dit))) * 30000)
+    amplitude = np.iinfo(np.int16).max / 2
+    dit = amplitude * np.sin(2.0 * np.pi * freq * t)
+    return dit 
 
 generate_word_sep = lambda wpm: generate_silence(7, wpm)
 generate_letter_sep = lambda wpm: generate_silence(3, wpm)
