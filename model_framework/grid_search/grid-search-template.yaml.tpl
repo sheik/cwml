@@ -19,7 +19,7 @@ data:
     low: {{ variables['snr_low'] }} 
     high: {{ variables['snr_high'] }} 
 system:
-  jobs: 96                     # Number of processes to run in parallel when generating data
+  jobs: 12                     # Number of processes to run in parallel when generating data
   gpu_enabled: True            # Is a GPU being used on this system?
   multi_gpu_enabled: False     # Should a GPU fabric be used (new/unstable)
   volumes:

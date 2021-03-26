@@ -3,9 +3,12 @@
 import os
 import sys
 import pathlib
+import random
 
 # disable tensorflow logging
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '10'
+#tf.autograph.set_verbosity(10)
+
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,6 +32,9 @@ if config.value('system.gpu_enabled'):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
     for device in physical_devices:
         tf.config.experimental.set_memory_growth(device, True)
+
+tf.config.threading.set_inter_op_parallelism_threads(12)
+tf.config.threading.set_intra_op_parallelism_threads(12)
 
 # show plots?
 show_plots = False
@@ -241,10 +247,24 @@ num_labels = len(commands)
 
 model = None
 
-if config.value('system.multi_gpu_enabled'):
-    strategy = tf.distribute.MultiWorkerMirroredStrategy()
+with tf.device('/gpu:'+str(random.randint(0,7))):
+    if config.value('system.multi_gpu_enabled'):
+        strategy = tf.distribute.MultiWorkerMirroredStrategy()
 
-    with strategy.scope():
+        with strategy.scope():
+            model = models.Sequential([
+                layers.Input(shape=input_shape),
+                preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
+                layers.Conv2D(32, 3, activation='relu'),
+                layers.Conv2D(64, 3, activation='relu'),
+                layers.MaxPooling2D(),
+                layers.Dropout(0.25),
+                layers.Flatten(),
+                layers.Dense(128, activation='relu'),
+                layers.Dropout(0.5),
+                layers.Dense(num_labels),
+            ])
+    else:
         model = models.Sequential([
             layers.Input(shape=input_shape),
             preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
@@ -257,66 +277,49 @@ if config.value('system.multi_gpu_enabled'):
             layers.Dropout(0.5),
             layers.Dense(num_labels),
         ])
-else:
-    model = models.Sequential([
-        layers.Input(shape=input_shape),
-        preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
-        layers.Conv2D(32, 3, activation='relu'),
-        layers.Conv2D(64, 3, activation='relu'),
-        layers.MaxPooling2D(),
-        layers.Dropout(0.25),
-        layers.Flatten(),
-        layers.Dense(128, activation='relu'),
-        layers.Dropout(0.5),
-        layers.Dense(num_labels),
-    ])
 
-model.summary()
+    model.summary()
 
-model.compile(
-    optimizer=tf.keras.optimizers.Adam(),
-    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-    metrics=['accuracy'],
+    model.compile(
+        optimizer=tf.keras.optimizers.Adam(),
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics=['accuracy'],
+        )
+
+    if latest:
+        model.load_weights(latest)
+
+    history = model.fit(
+        train_ds, 
+        validation_data=val_ds,  
+        epochs=config.value('model.epochs'),
+        callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience')), cp_callback],
     )
 
-if latest:
-    model.load_weights(latest)
+    """Let's check the training and validation loss curves to see how your model has improved during training."""
 
-history = model.fit(
-    train_ds, 
-    validation_data=val_ds,  
-    epochs=config.value('model.epochs'),
-    callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience')), cp_callback],
-)
+    metrics = history.history
+    if 'val_loss' in metrics and show_plots:
+        plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
+        plt.legend(['loss', 'val_loss'])
+        plt.show()
 
-"""Let's check the training and validation loss curves to see how your model has improved during training."""
 
-metrics = history.history
-if 'val_loss' in metrics and show_plots:
-    plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
-    plt.legend(['loss', 'val_loss'])
-    plt.show()
+    test_audio = []
+    test_labels = []
 
-"""## Evaluate test set performance
+    for audio, label in test_ds:
+      test_audio.append(audio.numpy())
+      test_labels.append(label.numpy())
 
-Let's run the model on the test set and check performance.
-"""
+    test_audio = np.array(test_audio)
+    test_labels = np.array(test_labels)
 
-test_audio = []
-test_labels = []
+    y_pred = np.argmax(model.predict(test_audio), axis=1)
+    y_true = test_labels
 
-for audio, label in test_ds:
-  test_audio.append(audio.numpy())
-  test_labels.append(label.numpy())
-
-test_audio = np.array(test_audio)
-test_labels = np.array(test_labels)
-
-y_pred = np.argmax(model.predict(test_audio), axis=1)
-y_true = test_labels
-
-test_acc = sum(y_pred == y_true) / len(y_true)
-print(f'Test set accuracy: {test_acc:.0%}')
+    test_acc = sum(y_pred == y_true) / len(y_true)
+    print(f'Test set accuracy: {test_acc:.0%}')
 
 # display confusion matrix (only practical for small datasets)
 if show_plots:

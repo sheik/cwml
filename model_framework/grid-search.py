@@ -21,6 +21,7 @@ s = []
 for key, values in grid.items():
     s.append([(key, value) for value in values])
 
+commands = []
 i = 0
 for permutation in list(itertools.product(*s)):
     i += 1
@@ -34,4 +35,8 @@ for permutation in list(itertools.product(*s)):
     variables['model_dir'] = 'grid-{}-model'.format(i)
     with open(filename, "w") as fd:
         fd.write(template.render(variables=variables))
+        commands.append("./run.sh {} &> /mnt/raid/grid-output/grid-{}.log".format(filename, i))
+
+with open("queue.sh", "w") as fp:
+    fp.write("\n".join(commands))
 
