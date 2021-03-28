@@ -6,7 +6,7 @@ import pathlib
 import random
 
 # disable tensorflow logging
-#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '10'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 #tf.autograph.set_verbosity(10)
 
 
@@ -61,7 +61,7 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
 """Check basic statistics about the dataset."""
 commands = np.array(tf.io.gfile.listdir(str(data_dir)))
 commands = commands[commands != 'README.md']
-print('Commands:', commands)
+#print('Commands:', commands)
 
 
 """Extract the audio files into a list and shuffle it."""
@@ -69,10 +69,10 @@ print('Commands:', commands)
 filenames = tf.io.gfile.glob(str(data_dir) + '/*/*')
 filenames = tf.random.shuffle(filenames)
 num_samples = len(filenames)
-print('Number of total examples:', num_samples)
-print('Number of examples per label:',
-      len(tf.io.gfile.listdir(str(data_dir/commands[0]))))
-print('Example file tensor:', filenames[0])
+#print('Number of total examples:', num_samples)
+#print('Number of examples per label:',
+ #     len(tf.io.gfile.listdir(str(data_dir/commands[0]))))
+#print('Example file tensor:', filenames[0])
 
 # split the data
 num_train = int(num_samples * 0.8)
@@ -82,9 +82,9 @@ train_files = filenames[:num_train]
 val_files = filenames[num_train: num_train + num_val]
 test_files = filenames[num_train+num_val:]
 
-print('Training set size', len(train_files))
-print('Validation set size', len(val_files))
-print('Test set size', len(test_files))
+#print('Training set size', len(train_files))
+#print('Validation set size', len(val_files))
+#print('Test set size', len(test_files))
 
 def decode_audio(audio_binary):
   audio, _ = tf.audio.decode_wav(audio_binary)
@@ -133,7 +133,7 @@ if show_plots:
 
 def get_spectrogram(waveform):
   # Padding for files with less than 256000 samples
-  print("Len: {}".format(tf.shape(waveform)))
+  #print("Len: {}".format(tf.shape(waveform)))
   zero_padding = tf.zeros([100000] - tf.shape(waveform), dtype=tf.float32)
 
   # Concatenate audio with padding so that all audio clips will be of the 
@@ -153,11 +153,11 @@ for waveform, label in waveform_ds.take(1):
   label = label.numpy().decode('utf-8')
   spectrogram = get_spectrogram(waveform)
 
-print('Label:', label)
-print('Waveform shape:', waveform.shape)
-print('Spectrogram shape:', spectrogram.shape)
-print('Audio playback')
-display.display(display.Audio(waveform, rate=8000))
+#print('Label:', label)
+#print('Waveform shape:', waveform.shape)
+#print('Spectrogram shape:', spectrogram.shape)
+#print('Audio playback')
+#display.display(display.Audio(waveform, rate=8000))
 
 def plot_spectrogram(spectrogram, ax):
   # Convert to frequencies to log scale and transpose so that the time is
@@ -243,7 +243,7 @@ The model also has the following additional preprocessing layers:
 
 for spectrogram, _ in spectrogram_ds.take(1):
   input_shape = spectrogram.shape
-print('Input shape:', input_shape)
+#print('Input shape:', input_shape)
 num_labels = len(commands)
 
 model = None
@@ -279,7 +279,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
             layers.Dense(num_labels),
         ])
 
-    model.summary()
+    #model.summary()
 
     model.compile(
         optimizer=tf.keras.optimizers.Adam(),
@@ -287,25 +287,26 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
         metrics=['accuracy'],
         )
 
-#    if latest:
-#        model.load_weights(latest)
+    if latest:
+        model.load_weights(latest)
+    else:
+        history = model.fit(
+            train_ds, 
+            validation_data=val_ds,  
+            epochs=config.value('model.epochs'),
+            callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience'))],
+        )
 
-    history = model.fit(
-        train_ds, 
-        validation_data=val_ds,  
-        epochs=config.value('model.epochs'),
-        callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience'))],
-    )
+        """Let's check the training and validation loss curves to see how your model has improved during training."""
 
-    """Let's check the training and validation loss curves to see how your model has improved during training."""
-
-    metrics = history.history
-    if 'val_loss' in metrics and show_plots:
-        plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
-        plt.legend(['loss', 'val_loss'])
-        plt.show()
+        metrics = history.history
+        if 'val_loss' in metrics and show_plots:
+            plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
+            plt.legend(['loss', 'val_loss'])
+            plt.show()
 
 
+if not latest:
     test_audio = []
     test_labels = []
 
@@ -321,6 +322,8 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
 
     test_acc = sum(y_pred == y_true) / len(y_true)
     print(f'Test set accuracy: {test_acc:.0%}')
+
+model.save_weights(checkpoint_path)
 
 # display confusion matrix (only practical for small datasets)
 if False:

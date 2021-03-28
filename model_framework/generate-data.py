@@ -131,7 +131,7 @@ if __name__ == "__main__":
                 #else:
                 #    current_chunk += word
                 current_chunk = word
-                print(current_chunk)
+                #print(current_chunk)
                 try:
                     os.mkdir("{}/{}".format(config.value('system.volumes.data'), current_chunk))
                 except:
