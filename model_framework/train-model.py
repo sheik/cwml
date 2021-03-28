@@ -33,8 +33,8 @@ if config.value('system.gpu_enabled'):
     for device in physical_devices:
         tf.config.experimental.set_memory_growth(device, True)
 
-tf.config.threading.set_inter_op_parallelism_threads(12)
-tf.config.threading.set_intra_op_parallelism_threads(12)
+#tf.config.threading.set_inter_op_parallelism_threads(12)
+#tf.config.threading.set_intra_op_parallelism_threads(12)
 
 # show plots?
 show_plots = False
@@ -133,7 +133,8 @@ if show_plots:
 
 def get_spectrogram(waveform):
   # Padding for files with less than 256000 samples
-  zero_padding = tf.zeros([256000] - tf.shape(waveform), dtype=tf.float32)
+  print("Len: {}".format(tf.shape(waveform)))
+  zero_padding = tf.zeros([100000] - tf.shape(waveform), dtype=tf.float32)
 
   # Concatenate audio with padding so that all audio clips will be of the 
   # same length
@@ -141,7 +142,7 @@ def get_spectrogram(waveform):
   equal_length = tf.concat([waveform, zero_padding], 0)
   spectrogram = tf.signal.stft(
       equal_length, frame_length=255, frame_step=128)
-      
+  #spectrogram = tf.expand_dims(equal_length, axis=0)
   spectrogram = tf.abs(spectrogram)
 
   return spectrogram
@@ -286,14 +287,14 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
         metrics=['accuracy'],
         )
 
-    if latest:
-        model.load_weights(latest)
+#    if latest:
+#        model.load_weights(latest)
 
     history = model.fit(
         train_ds, 
         validation_data=val_ds,  
         epochs=config.value('model.epochs'),
-        callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience')), cp_callback],
+        callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=config.value('model.patience'))],
     )
 
     """Let's check the training and validation loss curves to see how your model has improved during training."""
@@ -322,7 +323,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
     print(f'Test set accuracy: {test_acc:.0%}')
 
 # display confusion matrix (only practical for small datasets)
-if show_plots:
+if True:
     confusion_mtx = tf.math.confusion_matrix(y_true, y_pred) 
     plt.figure(figsize=(10, 8))
     sns.heatmap(confusion_mtx, xticklabels=commands, yticklabels=commands, 
@@ -333,13 +334,31 @@ if show_plots:
 
 
 # test inference
-#sample_file = test_data_dir/'test.wav'
-#
-#sample_ds = preprocess_dataset([str(sample_file)])
-#
-#for spectrogram, label in sample_ds.batch(1):
-#  prediction = model(spectrogram)
-#  plt.bar(commands, tf.nn.softmax(prediction[0]))
-#  plt.title(f'Predictions for "{commands[label[0]]}"')
-#  plt.show()
-#
+sample_file = test_data_dir/'output011.wav'
+
+import glob, os
+os.chdir("/mnt/raid/single-test")
+files = sorted(glob.glob("output*.wav"))
+print("number of files: {}".format(len(files)))
+
+for f in files:
+    print(f)
+
+sample_ds = preprocess_dataset([str(test_data_dir/f) for f in files])
+
+for spectrogram, label in sample_ds.batch(1):
+    prediction = model(spectrogram)
+    predictions = zip(commands, prediction[0])
+    print(max(predictions, key=lambda x: x[1])[0], end=' ', flush=True)
+    #plt.bar(commands, tf.nn.softmax(prediction[0]))
+    #plt.title(f'Predictions for "{commands[label[0]]}"')
+    #plt.show()
+
+    #for k, v in predictions:
+    #    print("{}: {}".format(k, v))
+    #print("\n")
+#    for i, val in zip(commands, tf.nn.softmax(prediction[0])):
+        #print(max(
+#        print("{}: {}".format(i, val))
+
+

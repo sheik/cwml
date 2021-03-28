@@ -89,7 +89,7 @@ def make_data(si_tup):
     word, i, wpm = si_tup
     snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
     data = SNR(encode(word, wpm), snr)
-    write_wav("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i), sample_rate, data.astype(np.int16))
+    write_wav("output.wav", sample_rate, data.astype(np.int16))
 
 def read_in_chunks(file_object):
     i = 0
@@ -102,48 +102,5 @@ def read_in_chunks(file_object):
 
 
 if __name__ == "__main__":
-    stop_words = stopwords.words('english')
-    # generate the data
-    with Pool(config.value('system.jobs')) as p:
-        chunk = []
-        with open(config.value('data.corpus')) as fp:
-            try:
-                os.mkdir("{}".format(config.value('system.volumes.data')))
-                os.mkdir("{}".format(config.value('system.volumes.test')))
-            except:
-                pass
-            
-            total_length = 0
-            sample_length = config.value('data.sample_length') # seconds
-            current_chunk = ""
-            count = 0
-            
-            for word in fp.read().split():
-                if config.value('data.remove_stopwords'):
-                    if word.lower() in stop_words:
-                        continue
-                if config.value('data.max_phrases') != 0 and count > config.value('data.max_phrases'):
-                    break
-                #total_length = (len(current_chunk)*20.0) / config.value('data.wpm_range.low')
-                #if total_length < sample_length:
-                #    current_chunk += word + " "
-                #    continue
-                #else:
-                #    current_chunk += word
-                current_chunk = word
-                print(current_chunk)
-                try:
-                    os.mkdir("{}/{}".format(config.value('system.volumes.data'), current_chunk))
-                except:
-                    pass
-
-                for i in range(0, config.value('data.samples_per_phrase')):
-                    wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
-                    chunk.append((current_chunk, i, wpm))
-
-                total_length = 0
-                current_chunk = ""
-                count += 1
-
-        p.map(make_data, chunk)
+    make_data(('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z', 1, 15))
 
