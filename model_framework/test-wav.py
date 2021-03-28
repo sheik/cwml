@@ -74,8 +74,8 @@ def encode(s, wpm):
                 result = np.concatenate((result, generate_symbol_sep(wpm)))
             elif symbol == ' ':
                 result = np.concatenate((result, generate_word_sep(wpm)))
-        #result = np.concatenate((result, generate_letter_sep(wpm)))
-#    result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
+        result = np.concatenate((result, generate_letter_sep(wpm)))
+    result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
     return result
 
 def SNR(cw, dB):
@@ -102,5 +102,5 @@ def read_in_chunks(file_object):
 
 
 if __name__ == "__main__":
-    make_data(('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z', 1, 15))
+    make_data(('THIS IS A QUICK EXAMPLE SHOWING OFF A RANGE OF LETTERS', 1, 15))
 

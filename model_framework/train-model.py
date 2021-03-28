@@ -323,7 +323,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
     print(f'Test set accuracy: {test_acc:.0%}')
 
 # display confusion matrix (only practical for small datasets)
-if True:
+if False:
     confusion_mtx = tf.math.confusion_matrix(y_true, y_pred) 
     plt.figure(figsize=(10, 8))
     sns.heatmap(confusion_mtx, xticklabels=commands, yticklabels=commands, 
@@ -334,22 +334,16 @@ if True:
 
 
 # test inference
-sample_file = test_data_dir/'output011.wav'
-
 import glob, os
 os.chdir("/mnt/raid/single-test")
 files = sorted(glob.glob("output*.wav"))
-print("number of files: {}".format(len(files)))
-
-for f in files:
-    print(f)
 
 sample_ds = preprocess_dataset([str(test_data_dir/f) for f in files])
 
 for spectrogram, label in sample_ds.batch(1):
     prediction = model(spectrogram)
     predictions = zip(commands, prediction[0])
-    print(max(predictions, key=lambda x: x[1])[0], end=' ', flush=True)
+    print(max(predictions, key=lambda x: x[1])[0], end='', flush=True)
     #plt.bar(commands, tf.nn.softmax(prediction[0]))
     #plt.title(f'Predictions for "{commands[label[0]]}"')
     #plt.show()
