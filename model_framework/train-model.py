@@ -343,7 +343,10 @@ sample_ds = preprocess_dataset([str(test_data_dir/f) for f in files])
 for spectrogram, label in sample_ds.batch(1):
     prediction = model(spectrogram)
     predictions = zip(commands, prediction[0])
-    print(max(predictions, key=lambda x: x[1])[0], end='', flush=True)
+    letter = max(predictions, key=lambda x: x[1])[0]
+    letter = ' ' if letter == '_' else letter
+    print(letter, end='', flush=True)
+print("\n")
     #plt.bar(commands, tf.nn.softmax(prediction[0]))
     #plt.title(f'Predictions for "{commands[label[0]]}"')
     #plt.show()

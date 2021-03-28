@@ -102,5 +102,5 @@ def read_in_chunks(file_object):
 
 
 if __name__ == "__main__":
-    make_data(('THIS IS A QUICK EXAMPLE SHOWING OFF A RANGE OF LETTERS', 1, 15))
+    make_data(('The quick brown fox jumps over the lazy dog And a few more words just to see if it works', 1, 15))
 
