@@ -89,7 +89,7 @@ def make_data(si_tup):
     word, i, wpm = si_tup
     snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
     data = SNR(encode(word, wpm), snr)
-    write_wav("output.wav", sample_rate, data.astype(np.int16))
+    write_wav("test.wav", sample_rate, data.astype(np.int16))
 
 def read_in_chunks(file_object):
     i = 0
