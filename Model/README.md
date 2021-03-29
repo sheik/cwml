@@ -2,7 +2,7 @@
 
 Just run
 
-    ./run.sh models/quick-example.yaml
+    ./run.sh models/single.yaml
 
 # How to make your own model
 
