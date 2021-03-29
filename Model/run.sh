@@ -1,6 +1,13 @@
 #!/bin/bash
 
-. venv/bin/activate
+if [ ! -d venv ]; then
+    virtualenv venv
+    . venv/bin/activate
+    pip install -r requirements.txt
+else
+    . venv/bin/activate
+fi
+
 
 testdir=$(python get-value.py $1 system.volumes.test)
 datadir=$(python get-value.py $1 system.volumes.data)

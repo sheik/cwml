@@ -1,8 +1,18 @@
-# Quick Start
+# Morse Code Machine Learning 
+A machine learning model for CW / morse code
 
-Just run
+## How to run
+1. Download the current [Anaconda](https://www.anaconda.com/products/individual) and install it.  
+2. Install virtualenv
 
-    ./run.sh models/single.yaml
+    $ conda install virtualenv
+
+Confirm "yes" when prompted
+
+3.  To run the current notebook, simply download the code and execute the **run.sh** script:
+
+    $  ./run.sh models/single.yaml
+
 
 # How to make your own model
 
@@ -13,6 +23,4 @@ Once you have your file, you can run it as above, or you can do each step indivi
     bash# python generate-date.py models/quick-example.yaml
     bash# python train-model.py models/quick-example.yaml
 
-And if you have a trained model already and would like to test it again
-
-    bash# python show-model.py models/quick-example.yaml
+(C) 2021 Jeff Aigner
