@@ -85,11 +85,15 @@ def SNR(cw, dB):
     noise = np.sqrt(noise_power)*np.random.normal(0,1,len(cw))
     return noise + cw
 
+from lib.image import create_image
+
 def make_data(si_tup):
     word, i, wpm = si_tup
     snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
     data = SNR(encode(word, wpm), snr)
     write_wav("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i), sample_rate, data.astype(np.int16))
+    create_image("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i))
+    
 
 def read_in_chunks(file_object):
     i = 0
