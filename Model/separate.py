@@ -12,7 +12,7 @@ space_count = 0
 for sample in data[1]:
     if state == "OUT_OF_LETTER":
         if space_count > 4000:
-            print('space')
+            #print('space')
             output_data = np.zeros(5000)
             wavfile.write("output-{:04d}.wav".format(i), 8000, output_data.astype(np.int16))
             i += 1
@@ -20,7 +20,7 @@ for sample in data[1]:
         if abs(sample) > 1500:
             prev_state = state
             state = "IN_LETTER"
-            print(state)
+            #print(state)
             low_count = 0
             d = []
         else:
@@ -35,7 +35,7 @@ for sample in data[1]:
         if low_count >= 1200:
             prev_state = state
             state = "OUT_OF_LETTER"
-            print(state)
+            #print(state)
             output_data = np.array(d, dtype=np.int16)
             wavfile.write("output-{:04d}.wav".format(i), 8000, output_data)
             space_count = 0
