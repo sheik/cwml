@@ -23,6 +23,6 @@ system:
   gpu_enabled: True            # Is a GPU being used on this system?
   multi_gpu_enabled: False      # Should a GPU fabric be used (new/unstable)
   volumes:
-    data: "/mnt/raid/single-data"             # Location to put generated wav files (training data)
-    model: "/mnt/raid/single-model"         # Location to save model 
-    test: "/mnt/raid/single-test"     # Location to save model test files 
+    data: "data/single-data"             # Location to put generated wav files (training data)
+    model: "data/single-model"         # Location to save model 
+    test: "data/single-test"     # Location to save model test files 

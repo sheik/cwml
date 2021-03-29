@@ -338,10 +338,9 @@ if False:
 
 # test inference
 import glob, os
-os.chdir("/mnt/raid/single-test")
-files = sorted(glob.glob("output*.wav"))
+files = sorted(glob.glob(str(test_data_dir/"output*.wav")))
 
-sample_ds = preprocess_dataset([str(test_data_dir/f) for f in files])
+sample_ds = preprocess_dataset([str(f) for f in files])
 
 for spectrogram, label in sample_ds.batch(1):
     prediction = model(spectrogram)
