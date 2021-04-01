@@ -162,14 +162,14 @@ def get_spectrogram(waveform):
   boolean_mask = tf.cast(maxes, dtype=tf.bool)              
   no_zeros = tf.boolean_mask(maxes, boolean_mask, axis=0)
 
-  try:
-    median_max = statistics.median(no_zeros)
-  except:
-    median_max = 8
+  counts = tf.unique_with_counts(no_zeros)    
+  if len(counts[0]) > 0:
+    median_max = counts[0][0]
+  else:
+    median_max = tf.cast(8, tf.int64)
     
   # cast properly for the tf.slice command
   median_max = tf.cast(median_max, tf.int32)
-
 
   #tf.print("median max: ", median_max)
   #print("Median: {}".format(median_max))
