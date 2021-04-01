@@ -37,7 +37,7 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
 
 
 sample_rate = config.value('data.sample_rate')
-freq = 600 #Hz
+freq = 750 #Hz
 
 # how many seconds to jitter the samples
 # this should allow for a better model by
@@ -92,7 +92,7 @@ def make_data(si_tup):
     snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
     data = SNR(encode(word, wpm), snr)
     write_wav("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i), sample_rate, data.astype(np.int16))
-    create_image("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i))
+    #create_image("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i))
     
 
 def read_in_chunks(file_object):

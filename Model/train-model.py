@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import tensorflow as tf
+import statistics
 
 from tensorflow.keras.layers.experimental import preprocessing
 from tensorflow.keras import layers
@@ -32,6 +33,8 @@ if config.value('system.gpu_enabled'):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
     for device in physical_devices:
         tf.config.experimental.set_memory_growth(device, True)
+
+print("Loading...")
 
 #tf.config.threading.set_inter_op_parallelism_threads(12)
 #tf.config.threading.set_intra_op_parallelism_threads(12)
@@ -130,6 +133,14 @@ if show_plots:
 
     plt.show()
 
+@tf.function
+def get_max(spectrogram):
+    max_seq_len = spectrogram.shape[1]
+    maxes = tf.TensorArray(tf.int64, size=129)
+    for i in tf.range(max_seq_len):
+        max_n = tf.math.argmax(spectrogram[i])
+        maxes = maxes.write(i, max_n)
+    return maxes.stack()
 
 def get_spectrogram(waveform):
   # Padding for files with less than 256000 samples
@@ -140,18 +151,46 @@ def get_spectrogram(waveform):
   # same length
   waveform = tf.cast(waveform, tf.float32)
   equal_length = tf.concat([waveform, zero_padding], 0)
+
   spectrogram = tf.signal.stft(
       equal_length, frame_length=255, frame_step=128)
-  #spectrogram = tf.expand_dims(equal_length, axis=0)
+  get_max(spectrogram)
   spectrogram = tf.abs(spectrogram)
+  maxes = get_max(spectrogram)
+
+  # Remove any zeros from the "maxes"  
+  boolean_mask = tf.cast(maxes, dtype=tf.bool)              
+  no_zeros = tf.boolean_mask(maxes, boolean_mask, axis=0)
+
+  try:
+    median_max = statistics.median(no_zeros)
+  except:
+    median_max = 8
+    
+  # cast properly for the tf.slice command
+  median_max = tf.cast(median_max, tf.int32)
+
+
+  #tf.print("median max: ", median_max)
+  #print("Median: {}".format(median_max))
+  spectrogram = tf.slice(spectrogram, begin=[0, median_max - 8], size=[-1, 16])
 
   return spectrogram
 
+# TensorFlow compatible function for determining the peak frequency
+def get_max(spectrogram):  
+    max_seq_len = spectrogram.shape[1]
+    maxes = tf.TensorArray(tf.int64, size=max_seq_len)
+    for i in tf.range(max_seq_len):
+        max_n = tf.math.argmax(tf.cast(spectrogram[i], tf.int64))
+        maxes = maxes.write(i, max_n)
+    return maxes.stack()
+
 """Next, you will explore the data. Compare the waveform, the spectrogram and the actual audio of one example from the dataset."""
 
-for waveform, label in waveform_ds.take(1):
-  label = label.numpy().decode('utf-8')
-  spectrogram = get_spectrogram(waveform)
+#for waveform, label in waveform_ds.take(1):
+#  label = label.numpy().decode('utf-8')
+#  spectrogram = get_spectrogram(waveform)
 
 #print('Label:', label)
 #print('Waveform shape:', waveform.shape)
@@ -190,6 +229,8 @@ def get_spectrogram_and_label_id(audio, label):
 
 spectrogram_ds = waveform_ds.map(
     get_spectrogram_and_label_id, num_parallel_calls=AUTOTUNE)
+
+#spectrogram_ds = tf.map_fn(tf.py_function
 
 """Examine the spectrogram "images" for different samples of the dataset."""
 
@@ -281,6 +322,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
 
     #model.summary()
 
+    print("Compiling model...")
     model.compile(
         optimizer=tf.keras.optimizers.Adam(),
         loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -288,6 +330,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
         )
 
     if latest:
+        print("Loading model weights...")
         model.load_weights(latest)
     else:
         history = model.fit(
@@ -343,12 +386,17 @@ files = sorted(glob.glob(str(test_data_dir/"output*.wav")))
 sample_ds = preprocess_dataset([str(f) for f in files])
 
 for spectrogram, label in sample_ds.batch(1):
-    prediction = model(spectrogram)
-    predictions = zip(commands, prediction[0])
-    letter = max(predictions, key=lambda x: x[1])[0]
-    letter = ' ' if letter == '_' else letter
-    print(letter, end='', flush=True)
+    try:
+        prediction = model(spectrogram)
+        predictions = zip(commands, prediction[0])
+        letter = max(predictions, key=lambda x: x[1])[0]
+        letter = ' ' if letter == '_' else letter
+        print(letter, end='', flush=True)
+    except:
+        pass
+
 print("\n")
+
     #plt.bar(commands, tf.nn.softmax(prediction[0]))
     #plt.title(f'Predictions for "{commands[label[0]]}"')
     #plt.show()
