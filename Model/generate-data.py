@@ -33,7 +33,7 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     '7':'--...', '8':'---..', '9':'----.', 
                     '0':'-----', ',':'--..--', '.':'.-.-.-', 
                     '?':'..--..', '/':'-..-.', '-':'-....-', 
-                    '(':'-.--.', ')':'-.--.-', ' ': ' ', '_': ' '}
+                    '(':'-.--.', ')':'-.--.-', ' ': ' ', '_': ' ','<period>':'.-.-.-'}
 
 
 sample_rate = config.value('data.sample_rate')
@@ -61,7 +61,7 @@ generate_dah = lambda wpm: generate_tone(3, wpm)
 generate_dit = lambda wpm: generate_tone(1, wpm)
 
 def encode(s, wpm):
-    s = s.upper()
+    s = s.upper().replace("<PERIOD>",".")
     result = np.zeros(1) 
     for char in s:
         symbols = "'".join([i for i in MORSE_CODE_DICT[char]])

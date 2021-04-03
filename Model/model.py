@@ -383,6 +383,7 @@ for spectrogram, label in sample_ds.batch(1):
         predictions = zip(commands, prediction[0])
         letter = max(predictions, key=lambda x: x[1])[0]
         letter = ' ' if letter == '_' else letter
+        letter = '.' if letter == '<period>' else letter
         print(letter, end='', flush=True)
     except:
         pass
