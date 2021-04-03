@@ -109,6 +109,7 @@ def read_in_chunks(file_object):
 
 if __name__ == "__main__":
     stop_words = stopwords.words('english')
+    print('Generating training data...')
     # generate the data
     with Pool(config.value('system.jobs')) as p:
         chunk = []

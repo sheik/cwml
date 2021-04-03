@@ -1,10 +1,14 @@
 import statistics
-import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import pathlib
 from scipy.io import wavfile
+
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+import tensorflow as tf
 
 from lib.config import ModelConfig
 
@@ -13,6 +17,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 config = ModelConfig(sys.argv[1])
+
+print('Loading libraries...')
 
 data_path = pathlib.Path(config.value('system.volumes.test'))
 
@@ -25,7 +31,7 @@ def decode_audio(audio_binary):
 def get_spectrogram(waveform):
   # Padding for files with less than 256000 samples
   #print("Len: {}".format(tf.shape(waveform)))
-  print(tf.shape(waveform))
+  #print(tf.shape(waveform))
   l = tf.shape(waveform) / [128]
   r = tf.shape(waveform) % [128]
 
@@ -70,6 +76,8 @@ audio_binary = tf.io.read_file(str(data_path/'test.wav'))
 waveform = decode_audio(audio_binary)
 spectrogram = get_spectrogram(waveform)
 #print(spectrogram.numpy()[0:100])
+
+print('Separating wav file into individual letters...')
 
 from scipy.io import wavfile
 data = wavfile.read(str(data_path/'test.wav'))

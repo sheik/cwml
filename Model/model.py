@@ -34,7 +34,7 @@ if config.value('system.gpu_enabled'):
     for device in physical_devices:
         tf.config.experimental.set_memory_growth(device, True)
 
-print("Loading...")
+print("Loading libraries...")
 
 #tf.config.threading.set_inter_op_parallelism_threads(12)
 #tf.config.threading.set_intra_op_parallelism_threads(12)
