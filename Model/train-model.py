@@ -257,9 +257,6 @@ test_ds = preprocess_dataset(test_files)
 
 """Batch the training and validation sets for model training."""
 
-for s, l in train_ds.batch(1):
-    print(s.shape)
-
 batch_size = 64 
 train_ds = train_ds.batch(batch_size)
 val_ds = val_ds.batch(batch_size)
