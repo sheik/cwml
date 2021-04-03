@@ -324,6 +324,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
         print("Loading model weights...")
         model.load_weights(latest)
     else:
+        print("Training model...")
         history = model.fit(
             train_ds, 
             validation_data=val_ds,  

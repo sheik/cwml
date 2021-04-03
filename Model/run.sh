@@ -17,13 +17,13 @@ mkdir data &> /dev/null
 mkdir -p $testdir &> /dev/null
 
 rm -rf $testdir/output*.wav
-#rm -rf $datadir
-#rm -rf $modeldir
+rm -rf $datadir
+rm -rf $modeldir
 
 python test-wav.py $1
 
 mv test.wav $testdir/test.wav
-python separate2.py $1
 
+python separate2.py $1
 python generate-data.py $1
-python train-model.py $1
+python model.py $1
