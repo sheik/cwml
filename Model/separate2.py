@@ -23,12 +23,23 @@ def decode_audio(audio_binary):
   return tf.squeeze(audio, axis=-1)
 
 def get_spectrogram(waveform):
+  # Padding for files with less than 256000 samples
+  #print("Len: {}".format(tf.shape(waveform)))
+  print(tf.shape(waveform))
+  l = tf.shape(waveform) / [128]
+  r = tf.shape(waveform) % [128]
+
+  zero_padding = 11630 - l[0]
+  if r == 0:
+      zero_padding -= 1
+
+  # Concatenate audio with padding so that all audio clips will be of the 
+  # same length
   waveform = tf.cast(waveform, tf.float32)
   #waveform = tf.concat([waveform, zero_padding], 0)
 
   spectrogram = tf.signal.stft(
       waveform, frame_length=256, frame_step=128)
-  print(spectrogram.shape)  
 
   spectrogram = tf.abs(spectrogram)
   maxes = get_max(spectrogram)
@@ -42,7 +53,9 @@ def get_spectrogram(waveform):
 
   spectrogram = tf.slice(spectrogram, begin=[0, max_power], size=[-1, 1])
 
+  spectrogram = tf.pad(spectrogram, [[0, zero_padding],[0, 0]])
   return spectrogram
+
 
 import tensorflow as tf
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -66,17 +79,24 @@ output_data = []
 low_count = 0
 cursor = 0
 state = "OUT_OF_LETTER"
+space_count = 0
 i = 0
 for frame in spectrogram.numpy():
     sample = frame[0]
     print(sample)
     if state == "OUT_OF_LETTER":
+        if space_count > 30:
+            wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, np.zeros(5000).astype(np.int16))
+            i += 1
+            space_count = 0
         if sample > 5.0:
             prev_state = state
             state = "IN_LETTER"
             print(state)
             low_count = 0
             output_data = []
+        else:
+            space_count += 1
     elif state == "IN_LETTER":
         chunk = data[1][cursor:cursor+128]
         output_data = np.concatenate((output_data,chunk))
@@ -92,6 +112,7 @@ for frame in spectrogram.numpy():
             print(state)
             output = np.array(output_data, dtype=np.int16)
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, output)
+            space_count = 0
             i += 1
     
     cursor += 128
