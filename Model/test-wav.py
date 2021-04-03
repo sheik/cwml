@@ -88,7 +88,7 @@ def SNR(cw, dB):
 def make_data(si_tup):
     word, i, wpm = si_tup
     snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
-    snr = -2 
+    snr = 6 
     data = SNR(encode(word, wpm), snr)
     write_wav("test.wav", sample_rate, data.astype(np.int16))
 

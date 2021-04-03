@@ -29,7 +29,7 @@ def get_spectrogram(waveform):
   l = tf.shape(waveform) / [128]
   r = tf.shape(waveform) % [128]
 
-  zero_padding = 11630 - l[0]
+  zero_padding = 11630+230778 - l[0]
   if r == 0:
       zero_padding -= 1
 
@@ -69,7 +69,7 @@ def get_max(spectrogram):
 audio_binary = tf.io.read_file(str(data_path/'test.wav'))
 waveform = decode_audio(audio_binary)
 spectrogram = get_spectrogram(waveform)
-print(spectrogram.numpy()[0:100])
+#print(spectrogram.numpy()[0:100])
 
 from scipy.io import wavfile
 data = wavfile.read(str(data_path/'test.wav'))
@@ -83,7 +83,7 @@ space_count = 0
 i = 0
 for frame in spectrogram.numpy():
     sample = frame[0]
-    print(sample)
+    #print(sample)
     if state == "OUT_OF_LETTER":
         if space_count > 30:
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, np.zeros(5000).astype(np.int16))
@@ -92,7 +92,7 @@ for frame in spectrogram.numpy():
         if sample > 5.0:
             prev_state = state
             state = "IN_LETTER"
-            print(state)
+            #print(state)
             low_count = 0
             output_data = []
         else:
@@ -109,7 +109,7 @@ for frame in spectrogram.numpy():
         if low_count > 6:
             prev_state = state
             state = "OUT_OF_LETTER"
-            print(state)
+            #print(state)
             output = np.array(output_data, dtype=np.int16)
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, output)
             space_count = 0

@@ -16,7 +16,7 @@ data:
     low: 10 
     high: 20 
   snr_range:                 # Range of SNR for the generated data
-    low: -8 
+    low: 0 
     high: 60 
 system:
   jobs: 96                     # Number of processes to run in parallel when generating data

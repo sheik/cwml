@@ -135,7 +135,7 @@ if show_plots:
 def get_spectrogram(waveform):
   # Padding for files with less than 256000 samples
   #print("Len: {}".format(tf.shape(waveform)))
-  print(tf.shape(waveform))
+  #print(tf.shape(waveform))
   l = tf.shape(waveform) / [128]
   r = tf.shape(waveform) % [128]
 
