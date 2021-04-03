@@ -22,36 +22,25 @@ def decode_audio(audio_binary):
   audio, _ = tf.audio.decode_wav(audio_binary)
   return tf.squeeze(audio, axis=-1)
 
-def get_spectrogram_tf(waveform):
-  # Padding for files with less than 256000 samples
-  #print("Len: {}".format(tf.shape(waveform)))
-  zero_padding = tf.zeros([1000000] - tf.shape(waveform), dtype=tf.float32)
-
-  # Concatenate audio with padding so that all audio clips will be of the 
-  # same length
+def get_spectrogram(waveform):
   waveform = tf.cast(waveform, tf.float32)
-  equal_length = tf.concat([waveform, zero_padding], 0)
+  #waveform = tf.concat([waveform, zero_padding], 0)
 
   spectrogram = tf.signal.stft(
-      waveform, frame_length=255, frame_step=128)
-  get_max(spectrogram)
+      waveform, frame_length=256, frame_step=128)
+  print(spectrogram.shape)  
+
   spectrogram = tf.abs(spectrogram)
   maxes = get_max(spectrogram)
-
-  # Remove any zeros from the "maxes"  
-  boolean_mask = tf.cast(maxes, dtype=tf.bool)              
-  no_zeros = tf.boolean_mask(maxes, boolean_mask, axis=0)
-
-  counts = tf.unique_with_counts(no_zeros)    
-  median_max = counts[0][0]
     
+  # get the most common high power  
+  counts = tf.unique_with_counts(maxes)
+  max_power = counts[0][tf.math.argmax(counts[2])]
+  
   # cast properly for the tf.slice command
-  median_max = tf.cast(median_max, tf.int32)
-  print("Median Max: {}".format(median_max))
+  max_power = tf.cast(max_power, tf.int32)
 
-  #tf.print("median max: ", median_max)
-  #print("Median: {}".format(median_max))
-  spectrogram = tf.slice(spectrogram, begin=[0, median_max], size=[-1, 1])
+  spectrogram = tf.slice(spectrogram, begin=[0, max_power], size=[-1, 1])
 
   return spectrogram
 
@@ -61,17 +50,12 @@ for device in physical_devices:
     tf.config.experimental.set_memory_growth(device, True)
 
 # TensorFlow compatible function for determining the peak frequency
-def get_max(spectrogram):  
-    max_seq_len = spectrogram.shape[1]
-    maxes = tf.TensorArray(tf.int64, size=max_seq_len)
-    for i in tf.range(max_seq_len):
-        max_n = tf.math.argmax(tf.cast(spectrogram[i], tf.int64))
-        maxes = maxes.write(i, max_n)
-    return maxes.stack()
+def get_max(spectrogram):
+    return tf.math.argmax(spectrogram, axis=1)
 
 audio_binary = tf.io.read_file(str(data_path/'test.wav'))
 waveform = decode_audio(audio_binary)
-spectrogram = get_spectrogram_tf(waveform)
+spectrogram = get_spectrogram(waveform)
 print(spectrogram.numpy()[0:100])
 
 from scipy.io import wavfile

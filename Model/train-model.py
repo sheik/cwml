@@ -101,7 +101,7 @@ def get_label(file_path):
 """Let's define a method that will take in the filename of the WAV file and output a tuple containing the audio and labels for supervised training."""
 
 def decode_audio(audio_binary):
-  audio, _ = tf.audio.decode_wav(audio_binary, desired_samples=20000)
+  audio, _ = tf.audio.decode_wav(audio_binary)
   return tf.squeeze(audio, axis=-1)
 
 def get_waveform_and_label(file_path):
@@ -115,7 +115,6 @@ files_ds = tf.data.Dataset.from_tensor_slices(train_files)
 waveform_ds = files_ds.map(get_waveform_and_label, num_parallel_calls=AUTOTUNE)
 
 """Let's examine a few audio waveforms with their corresponding labels."""
-
 
 if show_plots:
     rows = 3
@@ -133,16 +132,24 @@ if show_plots:
 
     plt.show()
 
-
-MAX_LENGTH = 150
-
 def get_spectrogram(waveform):
+  # Padding for files with less than 256000 samples
+  #print("Len: {}".format(tf.shape(waveform)))
+  print(tf.shape(waveform))
+  l = tf.shape(waveform) / [128]
+  r = tf.shape(waveform) % [128]
+
+  zero_padding = 330 - l[0]
+  if r == 0:
+      zero_padding -= 1
+
+  # Concatenate audio with padding so that all audio clips will be of the 
+  # same length
   waveform = tf.cast(waveform, tf.float32)
   #waveform = tf.concat([waveform, zero_padding], 0)
 
   spectrogram = tf.signal.stft(
       waveform, frame_length=256, frame_step=128)
-  print(spectrogram.shape)  
 
   spectrogram = tf.abs(spectrogram)
   maxes = get_max(spectrogram)
@@ -156,8 +163,9 @@ def get_spectrogram(waveform):
 
   spectrogram = tf.slice(spectrogram, begin=[0, max_power], size=[-1, 1])
 
-  output_list = [tf.zeros([1]) for i in range(0, MAX_LENGTH)]
+  spectrogram = tf.pad(spectrogram, [[0, zero_padding],[0, 0]])
   return spectrogram
+
 
 import tensorflow as tf
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -266,9 +274,10 @@ val_ds = val_ds.batch(batch_size)
 The model also has the following additional preprocessing layers:
 - A [`Resizing`](https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Resizing) layer to downsample the input to enable the model to train faster.
 """
-
+input_shape = (0, 0, 0)
 for spectrogram, _ in spectrogram_ds.take(1):
-  input_shape = spectrogram.shape
+  input_shape = tf.math.maximum(input_shape, spectrogram.shape)
+
 #print('Input shape:', input_shape)
 num_labels = len(commands)
 
