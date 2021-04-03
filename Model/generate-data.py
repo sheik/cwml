@@ -81,6 +81,8 @@ def encode(s, wpm):
 def SNR(cw, dB):
     SNR_linear = 10.0**(dB/10.0)
     power = cw.var()
+    if power == 0:
+        power = 0.1
     noise_power = power/SNR_linear
     noise = np.sqrt(noise_power)*np.random.normal(0,1,len(cw))
     return noise + cw

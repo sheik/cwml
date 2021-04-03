@@ -89,10 +89,6 @@ test_files = filenames[num_train+num_val:]
 #print('Validation set size', len(val_files))
 #print('Test set size', len(test_files))
 
-def decode_audio(audio_binary):
-  audio, _ = tf.audio.decode_wav(audio_binary)
-  return tf.squeeze(audio, axis=-1)
-
 """The label for each WAV file is its parent directory."""
 
 def get_label(file_path):
@@ -103,6 +99,10 @@ def get_label(file_path):
   return parts[-2]
 
 """Let's define a method that will take in the filename of the WAV file and output a tuple containing the audio and labels for supervised training."""
+
+def decode_audio(audio_binary):
+  audio, _ = tf.audio.decode_wav(audio_binary)
+  return tf.squeeze(audio, axis=-1)
 
 def get_waveform_and_label(file_path):
   label = get_label(file_path)
@@ -115,7 +115,6 @@ files_ds = tf.data.Dataset.from_tensor_slices(train_files)
 waveform_ds = files_ds.map(get_waveform_and_label, num_parallel_calls=AUTOTUNE)
 
 """Let's examine a few audio waveforms with their corresponding labels."""
-
 
 if show_plots:
     rows = 3
@@ -133,58 +132,49 @@ if show_plots:
 
     plt.show()
 
-@tf.function
-def get_max(spectrogram):
-    max_seq_len = spectrogram.shape[1]
-    maxes = tf.TensorArray(tf.int64, size=129)
-    for i in tf.range(max_seq_len):
-        max_n = tf.math.argmax(spectrogram[i])
-        maxes = maxes.write(i, max_n)
-    return maxes.stack()
-
 def get_spectrogram(waveform):
   # Padding for files with less than 256000 samples
   #print("Len: {}".format(tf.shape(waveform)))
-  zero_padding = tf.zeros([100000] - tf.shape(waveform), dtype=tf.float32)
+  #print(tf.shape(waveform))
+  l = tf.shape(waveform) / [128]
+  r = tf.shape(waveform) % [128]
+
+  zero_padding = 330 - l[0]
+  if r == 0:
+      zero_padding -= 1
 
   # Concatenate audio with padding so that all audio clips will be of the 
   # same length
   waveform = tf.cast(waveform, tf.float32)
-  equal_length = tf.concat([waveform, zero_padding], 0)
+  #waveform = tf.concat([waveform, zero_padding], 0)
 
   spectrogram = tf.signal.stft(
-      equal_length, frame_length=255, frame_step=128)
-  get_max(spectrogram)
+      waveform, frame_length=256, frame_step=128)
+
   spectrogram = tf.abs(spectrogram)
   maxes = get_max(spectrogram)
-
-  # Remove any zeros from the "maxes"  
-  boolean_mask = tf.cast(maxes, dtype=tf.bool)              
-  no_zeros = tf.boolean_mask(maxes, boolean_mask, axis=0)
-
-  counts = tf.unique_with_counts(no_zeros)    
-  if len(counts[0]) > 0:
-    median_max = counts[0][0]
-  else:
-    median_max = tf.cast(8, tf.int64)
     
+  # get the most common high power  
+  counts = tf.unique_with_counts(maxes)
+  max_power = counts[0][tf.math.argmax(counts[2])]
+  
   # cast properly for the tf.slice command
-  median_max = tf.cast(median_max, tf.int32)
+  max_power = tf.cast(max_power, tf.int32)
 
-  #tf.print("median max: ", median_max)
-  #print("Median: {}".format(median_max))
-  spectrogram = tf.slice(spectrogram, begin=[0, median_max - 8], size=[-1, 16])
+  spectrogram = tf.slice(spectrogram, begin=[0, max_power], size=[-1, 1])
 
+  spectrogram = tf.pad(spectrogram, [[0, zero_padding],[0, 0]])
   return spectrogram
 
+
+import tensorflow as tf
+physical_devices = tf.config.experimental.list_physical_devices('GPU')
+for device in physical_devices:
+    tf.config.experimental.set_memory_growth(device, True)
+
 # TensorFlow compatible function for determining the peak frequency
-def get_max(spectrogram):  
-    max_seq_len = spectrogram.shape[1]
-    maxes = tf.TensorArray(tf.int64, size=max_seq_len)
-    for i in tf.range(max_seq_len):
-        max_n = tf.math.argmax(tf.cast(spectrogram[i], tf.int64))
-        maxes = maxes.write(i, max_n)
-    return maxes.stack()
+def get_max(spectrogram):
+    return tf.math.argmax(spectrogram, axis=1)
 
 """Next, you will explore the data. Compare the waveform, the spectrogram and the actual audio of one example from the dataset."""
 
@@ -267,7 +257,7 @@ test_ds = preprocess_dataset(test_files)
 
 """Batch the training and validation sets for model training."""
 
-batch_size = 64
+batch_size = 64 
 train_ds = train_ds.batch(batch_size)
 val_ds = val_ds.batch(batch_size)
 
@@ -281,9 +271,10 @@ val_ds = val_ds.batch(batch_size)
 The model also has the following additional preprocessing layers:
 - A [`Resizing`](https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Resizing) layer to downsample the input to enable the model to train faster.
 """
-
+input_shape = (0, 0, 0)
 for spectrogram, _ in spectrogram_ds.take(1):
-  input_shape = spectrogram.shape
+  input_shape = tf.math.maximum(input_shape, spectrogram.shape)
+
 #print('Input shape:', input_shape)
 num_labels = len(commands)
 
@@ -333,6 +324,7 @@ with tf.device('/gpu:'+str(random.randint(0,7))):
         print("Loading model weights...")
         model.load_weights(latest)
     else:
+        print("Training model...")
         history = model.fit(
             train_ds, 
             validation_data=val_ds,  
