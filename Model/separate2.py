@@ -85,7 +85,7 @@ for frame in spectrogram.numpy():
     sample = frame[0]
     #print(sample)
     if state == "IN_SPACE":
-        if sample > 5.0:
+        if sample > 15.0:
             prev_state = state
             state = "IN_LETTER"
             low_count = 0
