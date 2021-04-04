@@ -100,7 +100,7 @@ for frame in spectrogram.numpy():
             low_count = 0
             output_data = []
     if state == "OUT_OF_LETTER":
-        if space_count > 10:
+        if space_count > 25:
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, np.zeros(5000).astype(np.int16))
             prev_state = state
             state = "IN_SPACE"
