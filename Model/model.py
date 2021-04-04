@@ -132,17 +132,7 @@ if show_plots:
 
     plt.show()
 
-def get_spectrogram(waveform):
-  # Padding for files with less than 256000 samples
-  #print("Len: {}".format(tf.shape(waveform)))
-  #print(tf.shape(waveform))
-  l = tf.shape(waveform) / [128]
-  r = tf.shape(waveform) % [128]
-
-  zero_padding = 330 - l[0]
-  if r == 0:
-      zero_padding -= 1
-
+def get_spectrogram(waveform):  
   # Concatenate audio with padding so that all audio clips will be of the 
   # same length
   waveform = tf.cast(waveform, tf.float32)
@@ -153,18 +143,21 @@ def get_spectrogram(waveform):
 
   spectrogram = tf.abs(spectrogram)
   maxes = get_max(spectrogram)
-    
+
   # get the most common high power  
   counts = tf.unique_with_counts(maxes)
   max_power = counts[0][tf.math.argmax(counts[2])]
-  
+
   # cast properly for the tf.slice command
   max_power = tf.cast(max_power, tf.int32)
 
-  spectrogram = tf.slice(spectrogram, begin=[0, max_power], size=[-1, 1])
+  start = 0
+  if max_power >= 2:
+      start = max_power - 2
 
-  spectrogram = tf.pad(spectrogram, [[0, zero_padding],[0, 0]])
-  return spectrogram
+  spectrogram = tf.slice(spectrogram, begin=[0, start], size=[-1, 4])
+  spectrogram = pad_up_to(spectrogram, [330, 4], 0)
+  return spectrogram  
 
 
 import tensorflow as tf
@@ -175,6 +168,11 @@ for device in physical_devices:
 # TensorFlow compatible function for determining the peak frequency
 def get_max(spectrogram):
     return tf.math.argmax(spectrogram, axis=1)
+
+def pad_up_to(t, max_in_dims, constant_values):
+    s = tf.shape(t)
+    paddings = [[0, m-s[i]] for (i,m) in enumerate(max_in_dims)]
+    return tf.pad(t, paddings, 'CONSTANT', constant_values=constant_values)
 
 """Next, you will explore the data. Compare the waveform, the spectrogram and the actual audio of one example from the dataset."""
 

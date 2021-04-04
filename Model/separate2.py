@@ -105,18 +105,18 @@ for frame in spectrogram.numpy():
             prev_state = state
             state = "IN_SPACE"
             i += 1
-        if sample > 5.0:
+        if sample > 18.0:
             prev_state = state
             state = "IN_LETTER"
             #print(state)
             low_count = 0
             output_data = []
-            output_data = np.concatenate((output_data,chunk))
+            #output_data = np.concatenate((output_data,chunk))
         else:
             space_count += 1
     elif state == "IN_LETTER":
         output_data = np.concatenate((output_data,chunk))
-        if sample < 10.0:
+        if sample < 18.0:
             low_count += 1
         else:
             low_count = 0
