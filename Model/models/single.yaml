@@ -7,7 +7,7 @@ model:
 data:
   corpus: "corpus.txt"
   jitter: 0.2              # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
-  samples_per_phrase: 2000    # Number of samples to generate per phrase. Samples will range in wpm, jitter, and noise
+  samples_per_phrase: 5000    # Number of samples to generate per phrase. Samples will range in wpm, jitter, and noise
   max_phrases: 0           # Number of phrases to take from the corpus. Specify 0 to take all 
   sample_rate: 8000          # Sample rate for the generated data
   sample_length: 2.0        # Approximate length samples should be in seconds
@@ -16,7 +16,7 @@ data:
     low: 10 
     high: 20 
   snr_range:                 # Range of SNR for the generated data
-    low: 2 
+    low: -4 
     high: 60 
 system:
   jobs: 96                     # Number of processes to run in parallel when generating data
