@@ -133,30 +133,52 @@ if show_plots:
     plt.show()
 
 def get_spectrogram(waveform):  
-  # Concatenate audio with padding so that all audio clips will be of the 
-  # same length
+  # cast waveform for tf.signal.stft
   waveform = tf.cast(waveform, tf.float32)
-  #waveform = tf.concat([waveform, zero_padding], 0)
 
+  # generate spectrogram
   spectrogram = tf.signal.stft(
       waveform, frame_length=256, frame_step=128)
 
+  # get the powers out of the STFT 
   spectrogram = tf.abs(spectrogram)
+
   maxes = get_max(spectrogram)
 
+  boolean_mask = tf.cast(maxes, dtype=tf.bool)              
+  no_zeros = tf.boolean_mask(maxes, boolean_mask, axis=0)
+
+  if no_zeros.shape[0] == 0:
+      no_zeros = maxes
+
   # get the most common high power  
-  counts = tf.unique_with_counts(maxes)
-  max_power = counts[0][tf.math.argmax(counts[2])]
+  counts = tf.unique_with_counts(no_zeros)
+
+  # get the "max power", avoid root errors by setting to 0
+  # by default
+  if len(counts[0]) > 0:
+    max_power = counts[0][tf.math.argmax(counts[2])]
+  else:
+    max_power = tf.cast(0, tf.int64)
 
   # cast properly for the tf.slice command
   max_power = tf.cast(max_power, tf.int32)
 
-  start = 0
-  if max_power >= 2:
-      start = max_power - 2
+  # calculate window 
+  start = max_power
+  if max_power >= 1:
+      start = max_power - 1
 
-  spectrogram = tf.slice(spectrogram, begin=[0, start], size=[-1, 4])
-  spectrogram = pad_up_to(spectrogram, [330, 4], 0)
+  size = 3
+  if spectrogram.shape[1] - start < size:
+      size = spectrogram.shape[1] - start
+
+  # create a window around the strongest signal
+  spectrogram = tf.slice(spectrogram, begin=[0, start], size=[-1, size])
+
+  # pad tensor so all tensors are euqal shape
+  spectrogram = pad_up_to(spectrogram, [330, 3], 0)
+
   return spectrogram  
 
 
