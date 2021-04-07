@@ -62,7 +62,8 @@ generate_dit = lambda wpm: generate_tone(1, wpm)
 
 def encode(s, wpm):
     s = s.upper()
-    result = np.zeros(1) 
+    result = np.zeros(1)
+    #result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
     for char in s:
         symbols = "'".join([i for i in MORSE_CODE_DICT[char]])
         for symbol in symbols:
@@ -75,7 +76,7 @@ def encode(s, wpm):
             elif symbol == ' ':
                 result = np.concatenate((result, generate_word_sep(wpm)))
         #result = np.concatenate((result, generate_letter_sep(wpm)))
-#    result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
+    #result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
     return result
 
 def SNR(cw, dB):

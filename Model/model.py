@@ -164,20 +164,17 @@ def get_spectrogram(waveform):
   # cast properly for the tf.slice command
   max_power = tf.cast(max_power, tf.int32)
 
+  size = 3
   # calculate window 
   start = max_power
   if max_power >= 1:
       start = max_power - 1
 
-  size = 3
-  if spectrogram.shape[1] - start < size:
-      size = spectrogram.shape[1] - start
-
   # create a window around the strongest signal
   spectrogram = tf.slice(spectrogram, begin=[0, start], size=[-1, size])
 
   # pad tensor so all tensors are euqal shape
-  spectrogram = pad_up_to(spectrogram, [330, 3], 0)
+  spectrogram = pad_up_to(spectrogram, [config.value('model.pad_to'), 0], 0)
 
   return spectrogram  
 
@@ -193,7 +190,7 @@ def get_max(spectrogram):
 
 def pad_up_to(t, max_in_dims, constant_values):
     s = tf.shape(t)
-    paddings = [[0, m-s[i]] for (i,m) in enumerate(max_in_dims)]
+    paddings = [[0,  tf.math.maximum(0, m-s[i])] for (i,m) in enumerate(max_in_dims)]
     return tf.pad(t, paddings, 'CONSTANT', constant_values=constant_values)
 
 """Next, you will explore the data. Compare the waveform, the spectrogram and the actual audio of one example from the dataset."""
@@ -291,45 +288,39 @@ val_ds = val_ds.batch(batch_size)
 The model also has the following additional preprocessing layers:
 - A [`Resizing`](https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Resizing) layer to downsample the input to enable the model to train faster.
 """
-input_shape = (0, 0, 0)
-for spectrogram, _ in spectrogram_ds.take(1):
-  input_shape = tf.math.maximum(input_shape, spectrogram.shape)
+input_shape = next(iter(spectrogram_ds))[0].shape
+#for spectrogram, _ in spectrogram_ds.batch(1):
+#  input_shape = tf.max(spectrogram.shape, input_shape)
 
 #print('Input shape:', input_shape)
 num_labels = len(commands)
 
 model = None
 
+model_layers = [layers.Input(shape=input_shape)]
+if config.value('model.resize_layer'):
+    model_layers.append(preprocessing.Resizing(config.value('model.pad_to'), config.value('model.resize.y')))
+                
+
+model_layers = model_layers + [
+#        layers.Conv1D(32, config.value('model.conv2d_kernel'), activation='relu'),
+#        layers.Conv1D(64, config.value('model.conv2d_kernel'), activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Dropout(0.25),
+        layers.Flatten(),
+        layers.Dense(128, activation='relu'),
+        layers.Dropout(0.5),
+        layers.Dense(num_labels),
+        ]
+
 with tf.device('/gpu:'+str(random.randint(0,7))):
     if config.value('system.multi_gpu_enabled'):
         strategy = tf.distribute.MultiWorkerMirroredStrategy()
 
         with strategy.scope():
-            model = models.Sequential([
-                layers.Input(shape=input_shape),
-                preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
-                layers.Conv2D(32, 3, activation='relu'),
-                layers.Conv2D(64, 3, activation='relu'),
-                layers.MaxPooling2D(),
-                layers.Dropout(0.25),
-                layers.Flatten(),
-                layers.Dense(128, activation='relu'),
-                layers.Dropout(0.5),
-                layers.Dense(num_labels),
-            ])
+            model = models.Sequential(model_layers)
     else:
-        model = models.Sequential([
-            layers.Input(shape=input_shape),
-            preprocessing.Resizing(config.value('model.resize.x'), config.value('model.resize.y')), 
-            layers.Conv2D(32, 3, activation='relu'),
-            layers.Conv2D(64, 3, activation='relu'),
-            layers.MaxPooling2D(),
-            layers.Dropout(0.25),
-            layers.Flatten(),
-            layers.Dense(128, activation='relu'),
-            layers.Dropout(0.5),
-            layers.Dense(num_labels),
-        ])
+        model = models.Sequential(model_layers)
 
     #model.summary()
 
