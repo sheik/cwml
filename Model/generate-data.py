@@ -13,6 +13,12 @@ from nltk.corpus import stopwords
 
 from lib.config import ModelConfig
 
+# Set seed for experiment reproducibility
+seed = 42
+
+np.random.seed(seed)
+random.seed(seed)
+
 if len(sys.argv) < 2:
     print("Usage: python GenerateData.py <model-yaml>")
     sys.exit(1)
@@ -146,8 +152,9 @@ if __name__ == "__main__":
                 i = 0
                 for wpm in range(config.value('data.wpm_range.low'), config.value('data.wpm_range.high')):
                     for noise in range(config.value('data.snr_range.low'), config.value('data.snr_range.high')):
-                        chunk.append((current_chunk, i, wpm, noise))
-                        i += 1
+                        for j in range(0, 3):
+                            chunk.append((current_chunk, i, wpm, noise))
+                            i += 1
 
                 total_length = 0
                 current_chunk = ""
