@@ -122,7 +122,7 @@ for frame in spectrogram.numpy():
             #output_data = np.concatenate((output_data,chunk))
         else:
             space_count += 1
-            max_space_count -= 0.2
+            max_space_count -= 0.1
     elif state == "IN_LETTER":
         output_data = np.concatenate((output_data,chunk))
         if sample < 18.0:
