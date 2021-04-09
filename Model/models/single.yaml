@@ -2,7 +2,7 @@ model:
   patience: 2                # Patience setting for keras early stopping
   epochs: 10                 # Number of epochs 
   resize:                    # How to resize image
-    x: 330
+    x: 660
     y: 16   
 data:
   corpus: "corpus.txt"
@@ -16,10 +16,10 @@ data:
     low: 10 
     high: 20 
   snr_range:                 # Range of SNR for the generated data
-    low: -4 
+    low: 2 
     high: 60 
 system:
-  jobs: 96                     # Number of processes to run in parallel when generating data
+  jobs: 96                   # Number of processes to run in parallel when generating data
   gpu_enabled: True            # Is a GPU being used on this system?
   multi_gpu_enabled: False      # Should a GPU fabric be used (new/unstable)
   volumes:
