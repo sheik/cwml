@@ -24,6 +24,6 @@ python test-wav.py $1
 
 mv test.wav $testdir/test.wav
 
-python separate2.py $1
+python letter-tokenizer.py $1
 python generate-data.py $1
 python model.py $1
