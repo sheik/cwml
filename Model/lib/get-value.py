@@ -1,4 +1,4 @@
-from lib.config import ModelConfig
+from config import ModelConfig
 import sys
 
 if len(sys.argv) < 3:

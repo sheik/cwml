@@ -6,3 +6,4 @@ venv
 *.pyc
 data
 *.mp3
+.idea

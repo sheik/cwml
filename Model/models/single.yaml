@@ -15,7 +15,7 @@ data:
   remove_stopwords: False    # Remove English stop words
   wpm_range:                 # Range of WPM for the generated data
     low: 10 
-    high: 30 
+    high: 20 
   snr_range:                 # Range of SNR for the generated data
     low: 2 
     high: 60 

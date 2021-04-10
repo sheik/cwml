@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import statistics
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,6 +7,8 @@ import pathlib
 from scipy.io import wavfile
 
 import os
+
+# disable tensorflow logging
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 import tensorflow as tf
@@ -63,9 +66,6 @@ def get_spectrogram(waveform):
   # create a window around the strongest signal
   spectrogram = tf.slice(spectrogram, begin=[0, max_power], size=[-1, 1])
 
-  # pad tensor so all tensors are euqal shape
-  #spectrogram = pad_up_to(spectrogram, [330, 3], 0)
-
   return spectrogram  
 
 import tensorflow as tf
@@ -80,7 +80,6 @@ def get_max(spectrogram):
 audio_binary = tf.io.read_file(str(data_path/'test.wav'))
 waveform = decode_audio(audio_binary)
 spectrogram = get_spectrogram(waveform)
-#print(spectrogram.numpy()[0:100])
 
 print('Separating wav file into individual letters...')
 

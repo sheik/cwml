@@ -9,9 +9,9 @@ else
 fi
 
 
-testdir=$(python get-value.py $1 system.volumes.test)
-datadir=$(python get-value.py $1 system.volumes.data)
-modeldir=$(python get-value.py $1 system.volumes.model)
+testdir=$(python lib/get-value.py $1 system.volumes.test)
+datadir=$(python lib/get-value.py $1 system.volumes.data)
+modeldir=$(python lib/get-value.py $1 system.volumes.model)
 
 mkdir data &> /dev/null
 mkdir -p $testdir &> /dev/null
@@ -24,6 +24,6 @@ python test-wav.py $1
 
 mv test.wav $testdir/test.wav
 
-python separate2.py $1
+python letter-tokenizer.py $1
 python generate-data.py $1
 python model.py $1
