@@ -21,8 +21,6 @@ if len(sys.argv) < 2:
 
 wavfile_path = sys.argv[1]
 
-print('Loading libraries...')
-
 data = wavfile.read(wavfile_path)
 
 def decode_audio(audio_binary):
@@ -79,16 +77,13 @@ audio_binary = tf.io.read_file(wavfile_path)
 waveform = decode_audio(audio_binary)
 spectrogram = get_spectrogram(waveform)
 
-print('Separating wav file into individual letters...')
-
 from scipy.io import wavfile
 data = wavfile.read(wavfile_path)
 
 symbols = 1
 state = "LOW"
-for frame in spectrogram.numpy()[0:128]:
+for frame in spectrogram.numpy()[0:1024]:
     sample = frame[0]
-    print(sample)
 
     if state == "LOW":
         if sample > 10.0:
@@ -99,4 +94,4 @@ for frame in spectrogram.numpy()[0:128]:
             state = "LOW"
             symbols += 1
 
-print(symbols)
+print((symbols*6.0/5.0)/8)
