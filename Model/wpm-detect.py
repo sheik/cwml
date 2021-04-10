@@ -84,17 +84,18 @@ print('Separating wav file into individual letters...')
 from scipy.io import wavfile
 data = wavfile.read(wavfile_path)
 
-symbols = 0
+symbols = 1
 state = "LOW"
-for frame in spectrogram.numpy()[0:63]:
+for frame in spectrogram.numpy()[0:128]:
     sample = frame[0]
+    print(sample)
 
     if state == "LOW":
-        if sample > 15.0:
+        if sample > 10.0:
             state = "HIGH"
             symbols += 1
     elif state == "HIGH":
-        if sample < 15.0:
+        if sample < 10.0:
             state = "LOW"
             symbols += 1
 
