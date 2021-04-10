@@ -3,7 +3,8 @@ model:
   epochs: 10                 # Number of epochs 
   resize:                    # How to resize image
     x: 660
-    y: 16   
+    y: 16
+  letter_end: 6             # used by the letter seperator
 data:
   corpus: "corpus.txt"
   jitter: 0.1              # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 

@@ -130,7 +130,7 @@ for frame in spectrogram.numpy():
         else:
             low_count = 0
         
-        if low_count > 6:
+        if low_count > config.value("model.letter_end"):
             prev_state = state
             state = "OUT_OF_LETTER"
             #print(state)

@@ -4,6 +4,7 @@ model:
   resize:                    # How to resize image
     x: 660
     y: 16   
+  letter_end: 3             # used by the letter seperator
 data:
   corpus: "corpus.txt"
   jitter: 0.1              # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
@@ -14,7 +15,7 @@ data:
   remove_stopwords: False    # Remove English stop words
   wpm_range:                 # Range of WPM for the generated data
     low: 20 
-    high: 30 
+    high: 35 
   snr_range:                 # Range of SNR for the generated data
     low: 2 
     high: 60 

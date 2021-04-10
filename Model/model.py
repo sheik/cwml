@@ -78,9 +78,9 @@ num_samples = len(filenames)
 #print('Example file tensor:', filenames[0])
 
 # split the data
-num_train = int(num_samples * 0.8)
+num_train = int(num_samples * 0.9)
 num_test = int(num_samples * 0.1)
-num_val = int(num_samples * 0.1)
+num_val = int(num_samples * 0.0)
 train_files = filenames[:num_train]
 val_files = filenames[num_train: num_train + num_val]
 test_files = filenames[num_train+num_val:]
