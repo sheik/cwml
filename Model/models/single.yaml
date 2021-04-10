@@ -1,5 +1,5 @@
 model:
-  patience: 2                # Patience setting for keras early stopping
+  patience: 5                # Patience setting for keras early stopping
   epochs: 10                 # Number of epochs 
   resize:                    # How to resize image
     x: 660
@@ -15,7 +15,7 @@ data:
   remove_stopwords: False    # Remove English stop words
   wpm_range:                 # Range of WPM for the generated data
     low: 10 
-    high: 20 
+    high: 30 
   snr_range:                 # Range of SNR for the generated data
     low: 2 
     high: 60 
