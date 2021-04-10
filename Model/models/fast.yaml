@@ -1,10 +1,10 @@
 model:
-  patience: 5                # Patience setting for keras early stopping
+  patience: 2                # Patience setting for keras early stopping
   epochs: 10                 # Number of epochs 
   resize:                    # How to resize image
     x: 660
-    y: 16
-  letter_end: 6             # used by the letter seperator
+    y: 16   
+  letter_end: 3             # used by the letter seperator
 data:
   corpus: "corpus.txt"
   jitter: 0.1              # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 
@@ -14,8 +14,8 @@ data:
   sample_length: 2.0        # Approximate length samples should be in seconds
   remove_stopwords: False    # Remove English stop words
   wpm_range:                 # Range of WPM for the generated data
-    low: 10 
-    high: 30 
+    low: 20 
+    high: 35 
   snr_range:                 # Range of SNR for the generated data
     low: 2 
     high: 60 

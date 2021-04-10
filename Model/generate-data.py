@@ -13,6 +13,12 @@ from nltk.corpus import stopwords
 
 from lib.config import ModelConfig
 
+# Set seed for experiment reproducibility
+seed = 42
+
+np.random.seed(seed)
+random.seed(seed)
+
 if len(sys.argv) < 2:
     print("Usage: python GenerateData.py <model-yaml>")
     sys.exit(1)
@@ -90,8 +96,7 @@ def SNR(cw, dB):
 from lib.image import create_image
 
 def make_data(si_tup):
-    word, i, wpm = si_tup
-    snr = random.randint(config.value('data.snr_range.low'), config.value('data.snr_range.high'))
+    word, i, wpm, snr = si_tup
     data = SNR(encode(word, wpm), snr)
     write_wav("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i), sample_rate, data.astype(np.int16))
     #create_image("{}/{}/{}.wav".format(config.value('system.volumes.data'), word, i))
@@ -144,9 +149,12 @@ if __name__ == "__main__":
                 except:
                     pass
 
-                for i in range(0, config.value('data.samples_per_phrase')):
-                    wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
-                    chunk.append((current_chunk, i, wpm))
+                i = 0
+                for wpm in range(config.value('data.wpm_range.low'), config.value('data.wpm_range.high')):
+                    for noise in range(config.value('data.snr_range.low'), config.value('data.snr_range.high')):
+                        for j in range(0, 6):
+                            chunk.append((current_chunk, i, wpm, noise))
+                            i += 1
 
                 total_length = 0
                 current_chunk = ""

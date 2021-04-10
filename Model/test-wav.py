@@ -102,7 +102,7 @@ def read_in_chunks(file_object):
 
 
 if __name__ == "__main__":
-    wpm = random.randint(10, 20)
+    wpm = random.randint(config.value('data.wpm_range.low'), config.value('data.wpm_range.high'))
     print("Using {}wpm in test file".format(wpm))
     make_data(('The quick brown fox jumps over the lazy dog And a few more words just to see if it works', 1, wpm))
 
