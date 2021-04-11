@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 /usr/local/bin/ffmpeg -i $1 -ar 8000 test.wav &> /dev/null
 wpm=$(python wpm-detect.py test.wav)

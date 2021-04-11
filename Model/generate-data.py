@@ -152,7 +152,7 @@ if __name__ == "__main__":
                 i = 0
                 for wpm in range(config.value('data.wpm_range.low'), config.value('data.wpm_range.high')):
                     for noise in range(config.value('data.snr_range.low'), config.value('data.snr_range.high')):
-                        for j in range(0, 6):
+                        for j in range(0, 10):
                             chunk.append((current_chunk, i, wpm, noise))
                             i += 1
 
