@@ -4,7 +4,7 @@ model:
   resize:                    # How to resize image
     x: 330
     y: 16   
-  letter_end: 3             # used by the letter seperator
+  letter_end: 8             # used by the letter seperator
 data:
   corpus: "corpus.txt"
   jitter: 0.3                 # Jitter is a number between 0.0 and 1.0 that determines how sloppy to "key" the samples 

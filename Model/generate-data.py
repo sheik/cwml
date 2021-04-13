@@ -81,7 +81,7 @@ def encode(s, wpm):
             elif symbol == ' ':
                 result = np.concatenate((result, generate_word_sep(wpm)))
         #result = np.concatenate((result, generate_letter_sep(wpm)))
-#    result = np.concatenate((result, generate_silence(random.uniform(5,15), wpm)))
+    result = np.concatenate((result, generate_silence(3, wpm)))
     return result
 
 def SNR(cw, dB):
