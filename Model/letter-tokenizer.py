@@ -37,7 +37,7 @@ def get_spectrogram(waveform):
 
   # generate spectrogram
   spectrogram = tf.signal.stft(
-      waveform, frame_length=256, frame_step=128)
+      waveform, frame_length=64, frame_step=64)
 
   # get the powers out of the STFT 
   spectrogram = tf.abs(spectrogram)
@@ -79,7 +79,26 @@ def get_max(spectrogram):
 
 audio_binary = tf.io.read_file(str(data_path/'test.wav'))
 waveform = decode_audio(audio_binary)
-spectrogram = get_spectrogram(waveform)
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
+output = None
+first = True
+for w in chunks(waveform, 8000):
+    spectrogram = get_spectrogram(w)
+    #spectrogram = tf.math.square(spectrogram)
+    spectrogram = tf.greater(spectrogram, 9)
+    if first:
+        output = spectrogram
+        first = False
+    else:
+        output = tf.concat([output, spectrogram], 0)
+
+spectrogram = output
 
 print('Separating wav file into individual letters...')
 
@@ -93,41 +112,62 @@ cursor = 0
 state = "OUT_OF_LETTER"
 space_count = 0
 i = 0
-max_space_count = 25 
+symbol_length = 0
+max_symbol_length = 0
+space_factor = 5
+contiguous_letters = 0
+flop_count = 0
 for frame in spectrogram.numpy():
-    chunk = data[1][cursor:cursor+128]
+    chunk = data[1][cursor:cursor+64]
     sample = frame[0]
-    #print(sample)
+
+    if contiguous_letters > 12:
+        space_factor = max(2, space_factor-1)
+        contiguous_letters = 0
+
+    if flop_count > 1:
+        space_factor += 1
+        flop_count = 0
+        
     if state == "IN_SPACE":
-        if sample > 15.0:
+        if sample:
             prev_state = state
             state = "IN_LETTER"
+            contiguous_letters += 1
             low_count = 0
             output_data = []
         space_count += 1
-        max_space_count = max(space_count, max_space_count)
     if state == "OUT_OF_LETTER":
-        if space_count > max_space_count:
+        if space_count > max_symbol_length * space_factor:
+            if contiguous_letters == 1:
+                flop_count += 1
+            else:
+                flop_count = 0
+
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, np.zeros(5000).astype(np.int16))
             prev_state = state
             state = "IN_SPACE"
+            contiguous_letters = 0
             i += 1
-        if sample > 18.0:
+        if sample:
             prev_state = state
             state = "IN_LETTER"
-            #print(state)
+            contiguous_letters += 1
             low_count = 0
-            output_data = []
-            #output_data = np.concatenate((output_data,chunk))
+            output_data = chunk
+            symbol_length = 1 
         else:
             space_count += 1
-            max_space_count -= 0.1
     elif state == "IN_LETTER":
         output_data = np.concatenate((output_data,chunk))
-        if sample < 18.0:
+        if not sample:
             low_count += 1
+            symbol_length += 1
         else:
+            symbol_length = 0
             low_count = 0
+
+        max_symbol_length = max(symbol_length, max_symbol_length)
         
         if low_count > config.value("model.letter_end"):
             prev_state = state
@@ -138,4 +178,5 @@ for frame in spectrogram.numpy():
             space_count = 0
             i += 1
     
-    cursor += 128
+    cursor += 64
+

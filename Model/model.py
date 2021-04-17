@@ -93,7 +93,7 @@ def get_spectrogram(waveform):
 
   # generate spectrogram
   spectrogram = tf.signal.stft(
-      waveform, frame_length=256, frame_step=128)
+      waveform, frame_length=64, frame_step=64)
 
   # get the powers out of the STFT 
   spectrogram = tf.abs(spectrogram)
