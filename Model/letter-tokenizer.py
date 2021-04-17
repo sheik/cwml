@@ -112,41 +112,55 @@ cursor = 0
 state = "OUT_OF_LETTER"
 space_count = 0
 i = 0
-max_space_count = 10 
+symbol_length = 0
+max_symbol_length = 0
+space_factor = 5
+contiguous_letters = 0
 for frame in spectrogram.numpy():
     chunk = data[1][cursor:cursor+64]
     sample = frame[0]
+
+    if contiguous_letters > 15:
+        space_factor = max(2, space_factor-1)
+        contiguous_letters = 0
+        
     #print(sample)
     if state == "IN_SPACE":
         if sample:
             prev_state = state
             state = "IN_LETTER"
+            contiguous_letters += 1
             low_count = 0
             output_data = []
         space_count += 1
-        max_space_count = max(space_count, max_space_count)
     if state == "OUT_OF_LETTER":
-        if space_count > max_space_count - 10:
+        if space_count > max_symbol_length * space_factor:
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, np.zeros(5000).astype(np.int16))
             prev_state = state
             state = "IN_SPACE"
+            contiguous_letters = 0
             i += 1
         if sample:
             prev_state = state
             state = "IN_LETTER"
+            contiguous_letters += 1
             #print(state)
             low_count = 0
             output_data = []
             output_data = np.concatenate((output_data,chunk))
+            symbol_length = 1 
         else:
             space_count += 1
-            max_space_count -= 0.1
     elif state == "IN_LETTER":
         output_data = np.concatenate((output_data,chunk))
         if not sample:
             low_count += 1
+            symbol_length += 1
         else:
+            symbol_length = 0
             low_count = 0
+
+        max_symbol_length = max(symbol_length, max_symbol_length)
         
         if low_count > config.value("model.letter_end"):
             prev_state = state
