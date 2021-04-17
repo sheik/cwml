@@ -121,11 +121,11 @@ for frame in spectrogram.numpy():
     chunk = data[1][cursor:cursor+64]
     sample = frame[0]
 
-    if contiguous_letters > 15:
+    if contiguous_letters > 12:
         space_factor = max(2, space_factor-1)
         contiguous_letters = 0
 
-    if flop_count > 4:
+    if flop_count > 1:
         space_factor += 1
         flop_count = 0
         
