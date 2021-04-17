@@ -91,7 +91,7 @@ first = True
 for w in chunks(waveform, 8000):
     spectrogram = get_spectrogram(w)
     #spectrogram = tf.math.square(spectrogram)
-    spectrogram = tf.greater(spectrogram, 3)
+    spectrogram = tf.greater(spectrogram, 9)
     if first:
         output = spectrogram
         first = False
