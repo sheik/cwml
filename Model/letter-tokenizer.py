@@ -116,6 +116,7 @@ symbol_length = 0
 max_symbol_length = 0
 space_factor = 5
 contiguous_letters = 0
+flop_count = 0
 for frame in spectrogram.numpy():
     chunk = data[1][cursor:cursor+64]
     sample = frame[0]
@@ -123,8 +124,11 @@ for frame in spectrogram.numpy():
     if contiguous_letters > 15:
         space_factor = max(2, space_factor-1)
         contiguous_letters = 0
+
+    if flop_count > 4:
+        space_factor += 1
+        flop_count = 0
         
-    #print(sample)
     if state == "IN_SPACE":
         if sample:
             prev_state = state
@@ -135,6 +139,11 @@ for frame in spectrogram.numpy():
         space_count += 1
     if state == "OUT_OF_LETTER":
         if space_count > max_symbol_length * space_factor:
+            if contiguous_letters == 1:
+                flop_count += 1
+            else:
+                flop_count = 0
+
             wavfile.write(str(data_path/"output-{:04d}.wav".format(i)), 8000, np.zeros(5000).astype(np.int16))
             prev_state = state
             state = "IN_SPACE"
@@ -144,10 +153,8 @@ for frame in spectrogram.numpy():
             prev_state = state
             state = "IN_LETTER"
             contiguous_letters += 1
-            #print(state)
             low_count = 0
-            output_data = []
-            output_data = np.concatenate((output_data,chunk))
+            output_data = chunk
             symbol_length = 1 
         else:
             space_count += 1
